@@ -6,4 +6,6 @@
 3. 根据指数估值确定每月定投额度，便宜的时候多买，贵的时候少买。
 
 ## 技术方案
-backend:koa2,frontend:vuejs
+- backend:koa2
+- frontend:vuejs
+- datacenter:nodejs
