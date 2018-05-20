@@ -6,7 +6,8 @@
     "start": "node bin/www",
     "dev": "./node_modules/.bin/nodemon bin/www",
     "prd": "pm2 start bin/www",
-    "test": "mocha -t 10000 ./test/unittest.js --exit"
+    "test": "mocha -t 10000 ./test/unittest.js --exit",
+    "test-cov": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --timeout 10000 -R spec ./test/  --exit"
   },
   "dependencies": {
     "debug": "^3.1.0",
