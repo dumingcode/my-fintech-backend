@@ -8,7 +8,7 @@ module.exports = {
         }
         try {
             let data = await lxrIndexService.fetchLxrAllIndexData();
-            console.log(data)
+           
             if (data == null || data == undefined) {
                 body.code = -1
                 body.msg = 'data is null'
