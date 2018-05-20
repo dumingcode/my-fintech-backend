@@ -23,6 +23,11 @@
     "pug": "^2.0.3"
   },
   "devDependencies": {
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.17.4",
+    "coveralls": "^3.0.1",
+    "istanbul": "^0.4.5",
+    "istanbul-harmony": "^0.3.16",
+    "mocha": "^5.1.1",
+    "supertest": "^3.0.0"
   }
 }
