@@ -7,8 +7,12 @@ module.exports = {
      * @return 指数的pe百分位 pb百分位 pe pb的绝对值
      */
     fetchLxrAllIndexData() {
-        let data = redisUtil.redisGet(config.redisStoreKey.lxrIndexDataAll)
-        return data
+        let lxrData = redisUtil.redisGet(config.redisStoreKey.lxrIndexDataAll)
+        return lxrData
+    },
+    fetchQmAllIndexData() {
+        let lxrData = redisUtil.redisGet(config.redisStoreKey.qmIndexDataAll)
+        return lxrData
     },
     queryLxrIndexDealDate() {
         let data = redisUtil.redisGet(config.redisStoreKey.lxrIndexDealDateKey)

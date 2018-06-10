@@ -7,7 +7,12 @@ module.exports = {
             data: null
         }
         try {
-            let data = await lxrIndexService.fetchLxrAllIndexData();
+            let lxrData = await lxrIndexService.fetchLxrAllIndexData();
+            let qmData = await lxrIndexService.fetchQmAllIndexData();
+            let lxrJson = JSON.parse(lxrData)
+            let qmJson = JSON.parse(qmData)
+            let data = JSON.stringify(Object.assign(lxrJson, qmJson))
+
 
             if (data == null || data == undefined) {
                 body.code = -1
