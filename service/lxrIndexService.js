@@ -13,6 +13,10 @@ module.exports = {
     queryLxrIndexDealDate() {
         let data = redisUtil.redisGet(config.redisStoreKey.lxrIndexDealDateKey)
         return data
+    },
+    queryQmIndexDealDate() {
+        let data = redisUtil.redisGet(config.redisStoreKey.qmIndexDealDateKey)
+        return data
     }
 
 
