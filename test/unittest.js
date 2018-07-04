@@ -21,6 +21,19 @@ describe('开始测试indexInvest的GET请求', () => {
     })
 })
 
+describe('POST /Bigdata Covers', function() {
+    it('query sina stock API', function(done) {
+        request
+            .post('/bigdata/querySinaStock.json')
+            .send('codes=600030,002014,000800,300104')
+            .expect(200)
+            .end(function(err, res) {
+                if (err) return done(err);
+                done();
+            });
+    });
+});
+
 describe('开始测试indexInvest的GET请求', () => {
 
     it('测试/queryLxrIndexDealDate.json请求', (done) => {
