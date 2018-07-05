@@ -28,6 +28,9 @@ module.exports = {
                 param += `sz${code},`
             }
         });
+        if (!param) {
+            throw new Error("输入股票代码错误!");
+        }
         param = param.replace(/(.*)[,]$/, '$1');
         let lxrData = await http.get(`http://hq.sinajs.cn/list=${param}`, _responseType = 'arraybuffer')
         const buf = new Buffer(lxrData.data, 'binary')
@@ -36,10 +39,14 @@ module.exports = {
         let jsonArr = []
         retArr.forEach(data => {
                 let arr = data.split('=')
+                let codeStr = arr[0]
+
+
                 if (arr[1]) {
                     let str = arr[1].substr(1)
                     let ret = {}
                     ret['name'] = str.split(',')[0]
+                    ret['code'] = codeStr.substr(codeStr.length - 6)
                     ret['price'] = parseFloat(str.split(',')[3])
                     ret['time'] = `${str.split(',')[30]} ${str.split(',')[31]}`
                     jsonArr.push(ret)

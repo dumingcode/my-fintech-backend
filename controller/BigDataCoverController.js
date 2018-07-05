@@ -54,7 +54,7 @@ module.exports = {
         } catch (error) {
             console.log(error)
             body.code = -1
-            body.msg = 'exception'
+            body.msg = error.toString()
             ctx.body = body
         }
     }
