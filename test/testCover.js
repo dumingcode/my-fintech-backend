@@ -13,7 +13,17 @@ describe('POST /Bigdata Covers', function() {
             .expect(200)
             .end(function(err, res) {
                 if (err) return done(err);
-                console.log(res.body)
+                done();
+            });
+    });
+});
+describe('GET /Bigdata Covers', function() {
+    it('query sina stock API', function(done) {
+        request
+            .get('/bigdata/querySinaStockGet.json?codes=600030,002014,000800,300104')
+            .expect(200)
+            .end(function(err, res) {
+                if (err) return done(err);
                 done();
             });
     });

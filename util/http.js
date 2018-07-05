@@ -74,13 +74,13 @@ module.exports = {
             return checkCode(res)
         }).catch(error => console.log(error))
     },
-    get(url = '', params = {}) {
+    get(url = '', _responseType = 'json') {
         // if (process.env.NODE_ENV === 'demo') url = baseUrl + url + '.json'
         return axios({
             method: 'get',
             baseURL: baseUrl,
             url,
-            params
+            responseType: _responseType
         }).then((response) => {
             return checkStatus(response)
         }).then((res) => {

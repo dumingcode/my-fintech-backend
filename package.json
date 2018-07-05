@@ -1,38 +1,39 @@
 {
-    "name": "my-fintech",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "start": "node bin/www",
-        "dev": "./node_modules/.bin/nodemon bin/www",
-        "prd": "pm2 start bin/www",
-        "test": "mocha -t 10000 ./test/unittest.js --exit",
-        "testCover": "mocha -t 10000 ./test/testCover.js --exit",
-        "test-cov": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --timeout 10000 -R spec ./test/  --exit"
-    },
-    "dependencies": {
-        "axios": "^0.18.0",
-        "debug": "^3.1.0",
-        "ioredis": "^3.2.2",
-        "koa": "^2.5.1",
-        "koa-bodyparser": "^4.2.0",
-        "koa-convert": "^1.2.0",
-        "koa-json": "^2.0.2",
-        "koa-logger": "^3.2.0",
-        "koa-onerror": "^4.0.0",
-        "koa-router": "^7.4.0",
-        "koa-static": "^4.0.2",
-        "koa-views": "^6.1.4",
-        "pug": "^2.0.3",
-        "qs": "^6.5.2"
-    },
-    "devDependencies": {
-        "chai": "^4.1.2",
-        "coveralls": "^3.0.1",
-        "istanbul": "^0.4.5",
-        "istanbul-harmony": "^0.3.16",
-        "mocha": "^5.1.1",
-        "nodemon": "^1.17.4",
-        "supertest": "^3.0.0"
-    }
+  "name": "my-fintech",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node bin/www",
+    "dev": "./node_modules/.bin/nodemon bin/www",
+    "prd": "pm2 start bin/www",
+    "test": "mocha -t 10000 ./test/unittest.js --exit",
+    "testCover": "mocha -t 10000 ./test/testCover.js --exit",
+    "test-cov": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --timeout 10000 -R spec ./test/  --exit"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "debug": "^3.1.0",
+    "iconv-lite": "^0.4.23",
+    "ioredis": "^3.2.2",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.0",
+    "koa-onerror": "^4.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "koa-views": "^6.1.4",
+    "pug": "^2.0.3",
+    "qs": "^6.5.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.1",
+    "istanbul": "^0.4.5",
+    "istanbul-harmony": "^0.3.16",
+    "mocha": "^5.1.1",
+    "nodemon": "^1.17.4",
+    "supertest": "^3.0.0"
+  }
 }

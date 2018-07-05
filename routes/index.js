@@ -1,7 +1,7 @@
 const router = require('koa-router')()
 
 const lxrIndexRouter = require('./lxrIndexRouter')
-const coverRouter = require('./BigDataCover')
+const coverRouter = require('./BigDataCoverRouter')
 
 
 router.use('/', lxrIndexRouter.routes(), lxrIndexRouter.allowedMethods())
