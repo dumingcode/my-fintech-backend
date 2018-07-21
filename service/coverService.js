@@ -47,7 +47,11 @@ module.exports = {
                     let ret = {}
                     ret['name'] = str.split(',')[0]
                     ret['code'] = codeStr.substr(codeStr.length - 6)
+                    ret['open'] = parseFloat(str.split(',')[1])
                     ret['price'] = parseFloat(str.split(',')[3])
+                    ret['close'] = parseFloat(str.split(',')[3])
+                    ret['high'] = parseFloat(str.split(',')[4])
+                    ret['low'] = parseFloat(str.split(',')[5])
                     ret['time'] = `${str.split(',')[30]} ${str.split(',')[31]}`
                     jsonArr.push(ret)
                 }
