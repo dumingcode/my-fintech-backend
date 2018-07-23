@@ -1,6 +1,7 @@
 const http = require('../util/http')
 const config = require('../config/config')
 const iconv = require('iconv-lite');
+const redisUtil = require('../util/redisUtil')
 
 function isIntNum(val) {
     var regPos = /^\d+$/; // 非负整数
@@ -59,6 +60,22 @@ module.exports = {
             // console.log(jsonArr)
 
         return jsonArr
+    },
+    //查询对应股票一年最低价 codes样例 600030,600001
+    async queryStockYearLowPrice(formData) {
+        if (!formData) { return null }
+        let codes = formData.codes
+        if (!codes) { return null }
+        let stocks = codes.split(',')
+        let promiseArr = []
+        for (let i = 0; i < stocks.length; i++) {
+            promiseArr.push(redisUtil.redisHGet(config.redisStoreKey.yearLowStockSet, stocks[i]))
+        }
+        return Promise.all(promiseArr).then(function(values) {
+            console.log(values)
+            return values.filter(value => { return value != null })
+        });
+
     }
 
 

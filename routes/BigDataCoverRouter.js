@@ -6,6 +6,7 @@ const coverController = require('../controller/BigDataCoverController')
 const routers = router
     .post('bigdata/querySinaStock.json', coverController.querySinaStock)
     .get('bigdata/querySinaStockGet.json', coverController.querySinaStockGet)
+    .get('bigdata/queryStockYearLowPrice.json', coverController.queryStockYearLowPrice)
 
 
 module.exports = routers
