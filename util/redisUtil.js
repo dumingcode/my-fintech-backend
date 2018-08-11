@@ -30,5 +30,16 @@ module.exports = {
         let result = await redis.get(key)
         await redis.disconnect()
         return result
+    },
+    redisSmembers(key) {
+        let redis = new Redis(redisConfig)
+        return redis.auth(redisConfig.password).then((val) => {
+            return redis.smembers(key)
+        }).then((val) => {
+            return val
+        }).catch((err) => {
+            console.log(err)
+            return null
+        })
     }
 }
