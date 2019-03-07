@@ -71,8 +71,21 @@ module.exports = {
             promiseArr.push(redisUtil.redisHGet(config.redisStoreKey.yearLowStockSet, stocks[i]))
         }
         return Promise.all(promiseArr).then(function(values) {
-            console.log(values)
-            return values.filter(value => { return value != null })
+            
+            return values.filter(value => { return value != null }).map((jsonStr)=>{
+                let json = JSON.parse(jsonStr)
+                let retObj = {
+                    'code': json['code'],
+                    'name': json['name'],
+                    'citiV1': json['citiV1'],
+                    'citiV2': json['citiV2'],
+                    'low': json['low'],
+                    'lowGenDate': json['lowGenDate'],
+                    'ma20': json['ma20']
+                }
+                console.log(retObj)
+                return JSON.stringify(retObj)
+            })
         });
 
     }
