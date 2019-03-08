@@ -22,9 +22,9 @@ module.exports = {
         let codeArr = codes.split(',')
         let param = ''
         codeArr.forEach(code => {
-            if (isIntNum(code) && code.startsWith('6')  && code.length == 6) {
+            if (isIntNum(code) && (code.startsWith('6') || code.startsWith('11'))  && code.length == 6) {
                 param += `sh${code},`
-            } else if (isIntNum(code) && (code.startsWith('0') || code.startsWith('3')) && code.length == 6) {
+            } else if (isIntNum(code) && (code.startsWith('0') || code.startsWith('3') || code.startsWith('12')) && code.length == 6) {
                 param += `sz${code},`
             }
         });
