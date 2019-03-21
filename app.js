@@ -8,10 +8,11 @@ const logger = require('koa-logger')
 
 const routers = require('./routes/index')
 const Router = require('koa-router')
+const Sentry = require('@sentry/node')
 
 // error handler
 onerror(app)
-
+Sentry.init({ dsn: 'https://c3c61980cbaf419990217ab42643fe12@sentry.io/1420239' })
 // middlewares
 app.use(bodyparser({
     enableTypes: ['json', 'form', 'text']
@@ -41,6 +42,7 @@ app.use(routers.routes()).use(routers.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
+    Sentry.captureException(err)
     console.error('server error', err, ctx)
 });
 
