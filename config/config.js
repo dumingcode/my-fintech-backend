@@ -13,7 +13,7 @@ const config = {
     },
     redis: {
         port: 6379,
-        host: 'localhost',
+        host: '172.17.188.91',
         keyPrefix: 'myfintech-',
         password: secureConfig.redisPasswd
     },
