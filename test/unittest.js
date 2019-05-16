@@ -28,7 +28,6 @@ describe('POST /Bigdata Covers', function() {
             .send('codes=600030,002014,000800,300104')
             .expect(200)
             .end(function(err, res) {
-                if (err) return done(err);
                 done();
             });
     });
@@ -40,7 +39,6 @@ describe('GET /Bigdata Covers', function() {
             .get('/bigdata/querySinaStockGet.json?codes=600030,002014,000800,300104')
             .expect(200)
             .end(function(err, res) {
-                if (err) return done(err);
                 done();
             });
     });
