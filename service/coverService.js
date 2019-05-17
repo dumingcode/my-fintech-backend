@@ -26,6 +26,8 @@ module.exports = {
                 param += `sh${code},`
             } else if (isIntNum(code) && (code.startsWith('0') || code.startsWith('3') || code.startsWith('12')) && code.length == 6) {
                 param += `sz${code},`
+            } else {
+                param += `${code},`
             }
         });
         if (!param) {
