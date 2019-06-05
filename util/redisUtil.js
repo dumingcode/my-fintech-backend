@@ -25,8 +25,9 @@ module.exports = {
         let redis = new Redis(redisConfig)
         return redis.smembers(key).then((val) => {
             return val
-        }).then(()=>{
+        }).then((val)=>{
             redis.disconnect()
+            return val
         }).catch((err) => {
             console.log(err)
             return null
