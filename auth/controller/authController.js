@@ -11,13 +11,14 @@ module.exports = {
     },
     weiboCallback(ctx) {
         try {
-            passport.authenticate('oauth2', {
-                successRedirect: '/app',
-                failureRedirect: '/'
-            })
+            // return passport.authenticate('oauth2', (err, user, info, status) => {
+            //     ctx.body = { err, user, info, status }
+            //     return ctx.body
+            // })(ctx)
+
             return passport.authenticate('oauth2', (err, user, info, status) => {
                 ctx.body = { err, user, info, status }
-                return ctx.body
+                return ctx.login(user)
             })(ctx)
         } catch (error) {
             console.log(error)
