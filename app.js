@@ -1,5 +1,4 @@
 const Koa = require('koa')
-const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
@@ -7,16 +6,32 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
 const routers = require('./routes/index')
-const Router = require('koa-router')
 const Sentry = require('@sentry/node')
+const passport = require('koa-passport')
+const config = require('./config/secureConfig')
+const session = require('koa-session')
 
+
+
+const app = new Koa()
 // error handler
 onerror(app)
 Sentry.init({ dsn: 'https://c3c61980cbaf419990217ab42643fe12@sentry.io/1420239' })
+
+
+// authentication
+require('./auth/authStrategy')
+
 // middlewares
 app.use(bodyparser({
     enableTypes: ['json', 'form', 'text']
 }))
+app.keys = [config.lxrToken]
+app.use(session({}, app))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
@@ -26,7 +41,7 @@ app.use(views(__dirname + '/views', {
 }))
 
 // logger
-app.use(async(ctx, next) => {
+app.use(async (ctx, next) => {
     const start = new Date()
     await next()
     const ms = new Date() - start
@@ -37,8 +52,6 @@ app.use(async(ctx, next) => {
 
 // routes
 app.use(routers.routes()).use(routers.allowedMethods())
-
-//app.use(users.routes(), users.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
