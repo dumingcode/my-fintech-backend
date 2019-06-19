@@ -4,8 +4,10 @@ module.exports = {
     weiboCallback(ctx) {
         try {
             console.log(ctx.state.passport)
+            ctx.body = ctx.state.passport
         } catch (error) {
             console.log(error)
+            ctx.body = "error"
         }
 
     }
