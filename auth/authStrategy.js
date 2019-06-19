@@ -1,18 +1,21 @@
 const passport = require('koa-passport')
 let OAuth2Strategy = require('passport-oauth2').Strategy
 const config = require('../config/secureConfig')
+const lpassport = require('l-passport')
 
-passport.use(new OAuth2Strategy({
-    authorizationURL: 'https://api.weibo.com/oauth2/authorize',
-    tokenURL: 'https://api.weibo.com/oauth2/access_token',
-    clientID: config.wbAuth.appKey,
-    clientSecret: config.wbAuth.appSecret,
-    callbackURL: config.wbAuth.callbackUrl
-},
-    function (accessToken, refreshToken, profile, cb) {
-        return cb(null, { accessToken, refreshToken, profile })
-    }
-))
+
+
+passport.initialize({
+    provider: 'weibo',
+    appId: config.wbAuth.appKey,
+    appSecret: config.wbAuth.appSecret,
+    redirect: config.wbAuth.callbackUrl,
+    state: '',
+    scope: 'email'
+})
+
+
+
 passport.serializeUser(function (user, done) {
     done(null, user)
 })

@@ -27,6 +27,7 @@
     "koa-session": "^5.12.0",
     "koa-static": "^4.0.2",
     "koa-views": "^6.1.4",
+    "l-passport": "^1.1.5",
     "passport": "^0.4.0",
     "passport-oauth2": "^1.5.0",
     "pug": "^2.0.3",

@@ -1,25 +1,11 @@
 const passport = require('koa-passport')
+const lpassport = require('l-passport')
 module.exports = {
-    weibo(ctx) {
-        let formData = ctx.request.body
-        try {
-            return passport.authenticate('oauth2', { scope: 'email' })(ctx)
-        } catch (error) {
-            console.log(error)
-        }
-
-    },
     weiboCallback(ctx) {
         try {
-            // return passport.authenticate('oauth2', (err, user, info, status) => {
-            //     ctx.body = { err, user, info, status }
-            //     return ctx.body
-            // })(ctx)
-
-            return passport.authenticate('oauth2', (err, user, info, status) => {
-                ctx.body = { err, user, info, status }
-                return ctx.login(user)
-            })(ctx)
+            lpassport.authorization('weibo'), async (ctx) => {
+                ctx.body = ctx.state.passport
+            }
         } catch (error) {
             console.log(error)
         }
