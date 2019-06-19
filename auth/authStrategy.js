@@ -5,7 +5,7 @@ const lpassport = require('l-passport')
 
 
 
-passport.initialize({
+lpassport.initialize({
     provider: 'weibo',
     appId: config.wbAuth.appKey,
     appSecret: config.wbAuth.appSecret,
