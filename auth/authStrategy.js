@@ -7,7 +7,7 @@ passport.use(new OAuth2Strategy({
     tokenURL: 'https://api.weibo.com/oauth2/access_token',
     clientID: config.wbAuth.appKey,
     clientSecret: config.wbAuth.appSecret,
-    callbackURL: "https://gunxueqiu.site/api/auth/weibo/callback"
+    callbackURL: config.wbAuth.callbackUrl
 },
     function (accessToken, refreshToken, profile, cb) {
         return cb(null, { accessToken, refreshToken, profile })
