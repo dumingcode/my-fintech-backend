@@ -3,7 +3,9 @@ module.exports = {
         try {
             console.log(ctx.state.passport)
             ctx.session.user = ctx.state.passport.id
-            ctx.body = ctx.state.passport
+            console.log(ctx.session.user)
+            ctx.cookies.set('user', ctx.session.user);
+            ctx.body = ctx.session.user
         } catch (error) {
             console.log(error)
             ctx.body = "error"
