@@ -15,9 +15,21 @@ module.exports = {
         await redis.disconnect()
         return result
     },
+    async redisSetEx(key, value, exMode, maxAge) {
+        let redis = new Redis(redisConfig)
+        let result = await redis.set(key, value, exMode, maxAge)
+        await redis.disconnect()
+        return result
+    },
     async redisGet(key) {
         let redis = new Redis(redisConfig)
         let result = await redis.get(key)
+        await redis.disconnect()
+        return result
+    },
+    async redisDel(key) {
+        let redis = new Redis(redisConfig)
+        let result = await redis.del(key)
         await redis.disconnect()
         return result
     },
@@ -25,7 +37,7 @@ module.exports = {
         let redis = new Redis(redisConfig)
         return redis.smembers(key).then((val) => {
             return val
-        }).then((val)=>{
+        }).then((val) => {
             redis.disconnect()
             return val
         }).catch((err) => {

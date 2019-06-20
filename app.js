@@ -7,11 +7,8 @@ const logger = require('koa-logger')
 
 const routers = require('./routes/index')
 const Sentry = require('@sentry/node')
-const passport = require('koa-passport')
-const config = require('./config/secureConfig')
-const session = require('koa-session')
-
-
+const session = require("koa-session2")
+const Store = require("./auth/store/Store");
 
 const app = new Koa()
 // error handler
@@ -26,11 +23,11 @@ require('./auth/authStrategy')
 app.use(bodyparser({
     enableTypes: ['json', 'form', 'text']
 }))
-app.keys = [config.lxrToken]
-app.use(session({}, app))
 
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(session({
+    store: new Store()
+}))
+
 
 app.use(json())
 app.use(logger())

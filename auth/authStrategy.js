@@ -1,5 +1,3 @@
-const passport = require('koa-passport')
-let OAuth2Strategy = require('passport-oauth2').Strategy
 const config = require('../config/secureConfig')
 const lpassport = require('l-passport')
 
@@ -14,12 +12,3 @@ lpassport.initialize({
     scope: 'email'
 })
 
-
-
-passport.serializeUser(function (user, done) {
-    done(null, user)
-})
-
-passport.deserializeUser(function (user, done) {
-    done(null, user)
-})
