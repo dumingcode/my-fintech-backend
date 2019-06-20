@@ -2,9 +2,7 @@ module.exports = {
     weiboCallback(ctx) {
         try {
             console.log(ctx.state.passport)
-            ctx.session.user = ctx.state.passport.id
-            console.log(ctx.session.user)
-            ctx.cookies.set('user', ctx.session.user);
+            ctx.session.user = ctx.state.passport.body.id
             ctx.body = ctx.session.user
         } catch (error) {
             console.log(error)
