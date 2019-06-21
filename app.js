@@ -25,6 +25,7 @@ app.use(bodyparser({
 }))
 
 app.use(session({
+    key: "SESSIONID",
     store: new Store()
 }))
 
