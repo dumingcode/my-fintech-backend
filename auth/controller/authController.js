@@ -18,5 +18,11 @@ module.exports = {
             ctx.body = "登出失败"
         }
 
+    },
+    isAuthenticated(ctx) {
+        console.log(ctx.session.user)
+        ctx.session.store = ['002007', '002014']
+        console.log(ctx.session)
+
     }
 }

@@ -7,6 +7,7 @@ const routers =
         authController.weiboCallback(ctx)
     })
         .get('auth/logout', authController.logout)
+        .get('auth/isAuth', authController.isAuthenticated)
 
 
 

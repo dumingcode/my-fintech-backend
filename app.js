@@ -17,7 +17,7 @@ Sentry.init({ dsn: 'https://c3c61980cbaf419990217ab42643fe12@sentry.io/1420239' 
 
 
 // authentication
-require('./auth/authStrategy')
+require('./auth/strategy/authStrategy')
 
 // middlewares
 app.use(bodyparser({
@@ -31,7 +31,10 @@ app.use(session({
     domain: 'gunxueqiu.site',
     path: '/'
 }))
-
+app.use(ctx => {
+    // refresh session if set maxAge
+    ctx.session.refresh()
+})
 
 app.use(json())
 app.use(logger())
