@@ -29,8 +29,7 @@ app.use(session({
     store: new Store(),
     maxAge: 1000 * 60 * 60 * 24 * 7,
     domain: 'gunxueqiu.site',
-    path: '/',
-    secure: true
+    path: '/'
 }))
 
 
