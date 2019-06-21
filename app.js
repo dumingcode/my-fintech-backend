@@ -26,7 +26,10 @@ app.use(bodyparser({
 
 app.use(session({
     key: "SESSIONID",
-    store: new Store()
+    store: new Store(),
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    domain: 'gunxueqiu.site',
+    path: '/'
 }))
 
 
