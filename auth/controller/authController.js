@@ -23,6 +23,6 @@ module.exports = {
         console.log(ctx.session.user)
         ctx.session.store = ['002007', '002014']
         console.log(ctx.session)
-
+        ctx.body = "test complete"
     }
 }
