@@ -31,10 +31,10 @@ app.use(session({
     domain: 'gunxueqiu.site',
     path: '/'
 }))
-app.use(ctx => {
-    // refresh session if set maxAge
-    ctx.session.refresh()
-})
+// app.use(ctx => {
+//     // refresh session if set maxAge
+//     ctx.session.refresh()
+// })
 
 app.use(json())
 app.use(logger())
