@@ -12,10 +12,6 @@ before_install:
 install:
   - npm install
 before_script: sudo redis-server /etc/redis/redis.conf --requirepass  $redis_password
-#script: 
-#  - npm test
-#after_success:
-#  - npm run test-cov
 deploy:
   provider: script
   skip_cleanup: true
