@@ -1,4 +1,4 @@
-const config = require('../config/secureConfig')
+const config = require('../../config/secureConfig')
 const lpassport = require('l-passport')
 
 
