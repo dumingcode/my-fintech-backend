@@ -33,4 +33,4 @@ npm-debug.log
 .DS_Store
 
 # config 
-config/secureConfig.js
+config/secureConfig_prod.js

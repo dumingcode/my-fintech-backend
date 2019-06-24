@@ -1,5 +1,5 @@
 const http = require('../util/http')
-const config = require('../config/config')
+const config = require('../config')
 const iconv = require('iconv-lite');
 const redisUtil = require('../util/redisUtil')
 
@@ -22,7 +22,7 @@ module.exports = {
         let codeArr = codes.split(',')
         let param = ''
         codeArr.forEach(code => {
-            if (isIntNum(code) && (code.startsWith('6') || code.startsWith('11') || code.startsWith('50') || code.startsWith('51'))  && code.length == 6) {
+            if (isIntNum(code) && (code.startsWith('6') || code.startsWith('11') || code.startsWith('50') || code.startsWith('51')) && code.length == 6) {
                 param += `sh${code},`
             } else if (isIntNum(code) && (code.startsWith('0') || code.startsWith('3') || code.startsWith('12') || code.startsWith('16')) && code.length == 6) {
                 param += `sz${code},`
@@ -38,25 +38,25 @@ module.exports = {
         let retArr = retData.split(';')
         let jsonArr = []
         retArr.forEach(data => {
-                let arr = data.split('=')
-                let codeStr = arr[0]
+            let arr = data.split('=')
+            let codeStr = arr[0]
 
 
-                if (arr[1]) {
-                    let str = arr[1].substr(1)
-                    let ret = {}
-                    ret['name'] = str.split(',')[0]
-                    ret['code'] = codeStr.substr(codeStr.length - 6)
-                    ret['open'] = parseFloat(str.split(',')[1])
-                    ret['price'] = parseFloat(str.split(',')[3])
-                    ret['close'] = parseFloat(str.split(',')[3])
-                    ret['high'] = parseFloat(str.split(',')[4])
-                    ret['low'] = parseFloat(str.split(',')[5])
-                    ret['time'] = `${str.split(',')[30]} ${str.split(',')[31]}`
-                    jsonArr.push(ret)
-                }
-            })
-            // console.log(jsonArr)
+            if (arr[1]) {
+                let str = arr[1].substr(1)
+                let ret = {}
+                ret['name'] = str.split(',')[0]
+                ret['code'] = codeStr.substr(codeStr.length - 6)
+                ret['open'] = parseFloat(str.split(',')[1])
+                ret['price'] = parseFloat(str.split(',')[3])
+                ret['close'] = parseFloat(str.split(',')[3])
+                ret['high'] = parseFloat(str.split(',')[4])
+                ret['low'] = parseFloat(str.split(',')[5])
+                ret['time'] = `${str.split(',')[30]} ${str.split(',')[31]}`
+                jsonArr.push(ret)
+            }
+        })
+        // console.log(jsonArr)
 
         return jsonArr
     },
@@ -70,9 +70,9 @@ module.exports = {
         for (let i = 0; i < stocks.length; i++) {
             promiseArr.push(redisUtil.redisHGet(config.redisStoreKey.yearLowStockSet, stocks[i]))
         }
-        return Promise.all(promiseArr).then(function(values) {
-            
-            return values.filter(value => { return value != null }).map((jsonStr)=>{
+        return Promise.all(promiseArr).then(function (values) {
+
+            return values.filter(value => { return value != null }).map((jsonStr) => {
                 let json = JSON.parse(jsonStr)
                 let retObj = {
                     'code': json['code'],

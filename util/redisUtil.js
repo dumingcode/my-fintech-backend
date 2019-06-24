@@ -1,5 +1,5 @@
 var Redis = require('ioredis')
-const config = require('../config/config')
+const config = require('../config')
 const redisConfig = config.redis
 
 module.exports = {

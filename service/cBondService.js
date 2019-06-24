@@ -1,4 +1,4 @@
-const config = require('../config/config')
+const config = require('../config')
 const redisUtil = require('../util/redisUtil')
 
 function isIntNum(val) {
@@ -20,9 +20,9 @@ module.exports = {
         for (let i = 0; i < stocks.length; i++) {
             promiseArr.push(redisUtil.redisHGet(config.redisStoreKey.yearLowStockSet, stocks[i]))
         }
-        return Promise.all(promiseArr).then(function(values) {
-            
-            return values.filter(value => { return value != null }).map((jsonStr)=>{
+        return Promise.all(promiseArr).then(function (values) {
+
+            return values.filter(value => { return value != null }).map((jsonStr) => {
                 let json = JSON.parse(jsonStr)
                 let retObj = {
                     'code': json['code'],

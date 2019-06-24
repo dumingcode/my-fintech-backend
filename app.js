@@ -8,7 +8,8 @@ const logger = require('koa-logger')
 const routers = require('./routes/index')
 const Sentry = require('@sentry/node')
 const session = require("koa-session2")
-const Store = require("./auth/store/Store");
+const Store = require("./auth/store/Store")
+const config = require("./config")
 
 const app = new Koa()
 // error handler
@@ -17,7 +18,7 @@ Sentry.init({ dsn: 'https://c3c61980cbaf419990217ab42643fe12@sentry.io/1420239' 
 
 
 // authentication
-require('./auth/strategy/authStrategy')
+require('./auth/strategy/weiboStrategy')
 
 // middlewares
 app.use(bodyparser({
@@ -28,7 +29,7 @@ app.use(session({
     key: "SESSIONID",
     store: new Store(),
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    domain: 'gunxueqiu.site',
+    domain: config.domain,
     path: '/'
 }))
 // app.use(ctx => {
