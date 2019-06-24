@@ -7,21 +7,14 @@ module.exports = {
             msg: 'ok',
             data: null
         }
-        try {
-            let data = await industryService.queryCitiFstIndustryInfo()
-            if (data == null || data == undefined) {
-                body.code = -1
-                body.msg = 'data is null'
-            } else {
-                body.data = data
-            }
-            ctx.body = body
-        } catch (error) {
-            console.log(error)
+        let data = await industryService.queryCitiFstIndustryInfo()
+        if (data == null || data == undefined) {
             body.code = -1
-            body.msg = error.toString()
-            ctx.body = body
+            body.msg = 'data is null'
+        } else {
+            body.data = data
         }
+        ctx.body = body
     },
     //查询中信二级行业明细
     async queryCitiSndIndustryInfo(ctx) {
@@ -30,21 +23,14 @@ module.exports = {
             msg: 'ok',
             data: null
         }
-        try {
-            let data = await industryService.queryCitiSndIndustryInfo()
-            if (data == null || data == undefined) {
-                body.code = -1
-                body.msg = 'data is null'
-            } else {
-                body.data = data
-            }
-            ctx.body = body
-        } catch (error) {
-            console.log(error)
+        let data = await industryService.queryCitiSndIndustryInfo()
+        if (data == null || data == undefined) {
             body.code = -1
-            body.msg = error.toString()
-            ctx.body = body
+            body.msg = 'data is null'
+        } else {
+            body.data = data
         }
+        ctx.body = body
     }
 
 

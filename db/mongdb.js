@@ -37,6 +37,14 @@ module.exports = {
         let result = await col.updateOne(filter, { $set: document }, { upsert: upsertVal })
         await client.close(true)
         return result
-    }
+    },
+    async queryDoc(dbName, collectionName, query) {
+        let client = await MongoClient.connect(mongoDbConfig.url, { useNewUrlParser: true })
+        let db = await client.db(dbName)
+        let col = await db.collection(collectionName)
+        let result = await col.find(query).toArray()
+        await client.close(true)
+        return result
+    },
 
 }

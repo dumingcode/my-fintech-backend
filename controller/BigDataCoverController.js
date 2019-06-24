@@ -7,23 +7,14 @@ module.exports = {
             msg: 'ok',
             data: null
         }
-        try {
-
-            let data = await coverService.fetchSinaStock(formData)
-            if (data == null || data == undefined) {
-                body.code = -1
-                body.msg = 'data is null'
-            } else {
-                body.data = data
-            }
-            ctx.body = body
-
-        } catch (error) {
-            console.log(error)
+        let data = await coverService.fetchSinaStock(formData)
+        if (data == null || data == undefined) {
             body.code = -1
-            body.msg = 'exception'
-            ctx.body = body
+            body.msg = 'data is null'
+        } else {
+            body.data = data
         }
+        ctx.body = body
     },
     async querySinaStockGet(ctx) {
         let formData = ctx.request.query
@@ -32,23 +23,14 @@ module.exports = {
             msg: 'ok',
             data: null
         }
-        try {
-
-            let data = await coverService.fetchSinaStock(formData)
-            if (data == null || data == undefined) {
-                body.code = -1
-                body.msg = 'data is null'
-            } else {
-                body.data = data
-            }
-            ctx.body = body
-
-        } catch (error) {
-            console.log(error)
+        let data = await coverService.fetchSinaStock(formData)
+        if (data == null || data == undefined) {
             body.code = -1
-            body.msg = error.toString()
-            ctx.body = body
+            body.msg = 'data is null'
+        } else {
+            body.data = data
         }
+        ctx.body = body
     },
     async queryStockYearLowPrice(ctx) {
         let formData = ctx.request.query
@@ -57,23 +39,14 @@ module.exports = {
             msg: 'ok',
             data: null
         }
-        try {
-
-            let data = await coverService.queryStockYearLowPrice(formData)
-            if (data == null || data == undefined) {
-                body.code = -1
-                body.msg = 'data is null'
-            } else {
-                body.data = data
-            }
-            ctx.body = body
-
-        } catch (error) {
-            console.log(error)
+        let data = await coverService.queryStockYearLowPrice(formData)
+        if (data == null || data == undefined) {
             body.code = -1
-            body.msg = error.toString()
-            ctx.body = body
+            body.msg = 'data is null'
+        } else {
+            body.data = data
         }
+        ctx.body = body
     }
 
 

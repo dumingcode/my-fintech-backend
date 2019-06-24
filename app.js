@@ -32,10 +32,14 @@ app.use(session({
     domain: config.domain,
     path: '/'
 }))
-// app.use(ctx => {
-//     // refresh session if set maxAge
-//     ctx.session.refresh()
-// })
+// 拦截登陆 user开头的必须登陆
+app.use(async (ctx, next) => {
+    if (!ctx.session.user && ctx.path.includes('/user')) {
+        ctx.status = 403
+        return
+    }
+    await next()
+})
 
 app.use(json())
 app.use(logger())
@@ -53,15 +57,30 @@ app.use(async (ctx, next) => {
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+// error-handling
+app.on('error', (err, ctx) => {
+    console.error('server error', err, ctx)
+    Sentry.captureException(err)
+})
 
+// 统一返回异常
+app.use(async (ctx, next) => {
+    try {
+        await next()
+    } catch (err) {
+        ctx.status = 500
+        ctx.body = {
+            code: -1,
+            message: err.toString(),
+            data: null
+        }
+        ctx.app.emit('error', err, ctx)
+    }
+})
 
 // routes
 app.use(routers.routes()).use(routers.allowedMethods())
 
-// error-handling
-app.on('error', (err, ctx) => {
-    Sentry.captureException(err)
-    console.error('server error', err, ctx)
-});
+
 
 module.exports = app

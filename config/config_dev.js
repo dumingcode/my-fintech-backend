@@ -3,8 +3,7 @@ module.exports = {
     redis: {
         port: 6379,
         host: '127.0.0.1',
-        keyPrefix: 'myfintech-',
-        password: secureConfig.redisPasswd
+        keyPrefix: 'myfintech-'
     },
     redisStoreKey: {
         lxrIndexKey: 'lxrIndex',
