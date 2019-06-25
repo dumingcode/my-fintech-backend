@@ -3,7 +3,7 @@ const config_prod = require('./config_prod')
 
 function config() {
     const env = String(process.env.NODE_ENV)
-    if (env.includes('prod')) {
+    if (env.includes('production')) {
         return config_prod
     } else {
         return config_dev

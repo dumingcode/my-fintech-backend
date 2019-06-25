@@ -3,38 +3,38 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "set NODE_ENV=prod && node bin/www",
-    "dev": "set NODE_ENV=dev && nodemon  bin/www",
+    "start": "set NODE_ENV=production && node bin/www",
+    "dev": "set NODE_ENV=development && nodemon  bin/www",
     "prd": "pm2 start bin/www"
   },
   "dependencies": {
-    "@sentry/node": "^4.6.4",
-    "axios": "^0.18.0",
-    "debug": "^3.1.0",
-    "iconv-lite": "^0.4.23",
-    "ioredis": "^3.2.2",
-    "koa": "^2.5.1",
-    "koa-bodyparser": "^4.2.0",
+    "@sentry/node": "^5.4.3",
+    "axios": "^0.19.0",
+    "debug": "^4.1.1",
+    "iconv-lite": "^0.4.24",
+    "ioredis": "^4.10.0",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
     "koa-convert": "^1.2.0",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.0",
-    "koa-onerror": "^4.0.0",
+    "koa-onerror": "^4.1.0",
     "koa-router": "^7.4.0",
     "koa-session2": "^2.2.10",
-    "koa-static": "^4.0.2",
-    "koa-views": "^6.1.4",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.0",
     "l-passport": "^1.1.5",
     "mongodb": "^3.2.7",
-    "pug": "^2.0.3",
-    "qs": "^6.5.2"
+    "pug": "^2.0.4",
+    "qs": "^6.7.0"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "coveralls": "^3.0.1",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.4",
     "istanbul": "^0.4.5",
     "istanbul-harmony": "^0.3.16",
-    "mocha": "^5.1.1",
-    "nodemon": "^1.17.4",
-    "supertest": "^3.0.0"
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
