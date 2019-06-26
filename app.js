@@ -30,7 +30,10 @@ app.use(session({
     store: new Store(),
     maxAge: 1000 * 60 * 60 * 24 * 7,
     domain: config.domain,
-    path: '/'
+    path: '/',
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict'
 }))
 // 拦截登陆 user开头的必须登陆
 app.use(async (ctx, next) => {
@@ -71,7 +74,7 @@ app.use(async (ctx, next) => {
         ctx.status = 500
         ctx.body = {
             code: -1,
-            message: err.toString(),
+            message: err.message,
             data: null
         }
         ctx.app.emit('error', err, ctx)
