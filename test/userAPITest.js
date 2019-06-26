@@ -3,7 +3,6 @@ const app = require('../app')
 
 const request = supertest(app.listen())
 
-
 describe('User API', function () {
     describe('保存用户个人自选股列表', function () {
         it('query sina stock API', function (done) {

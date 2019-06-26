@@ -101,6 +101,9 @@ module.exports = {
             optGrid = grid[0]
         }
         optGrid.code = formData.code
+        if (!formData.user) {
+            optGrid.user = user
+        }
         if (formData.low) {
             optGrid.low = formData.low
         }

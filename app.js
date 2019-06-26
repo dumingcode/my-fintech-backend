@@ -31,7 +31,7 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 * 7,
     domain: config.domain,
     path: '/',
-    secure: true,
+    secure: process.env.NODE_ENV === 'production' ? true : false,
     httpOnly: true,
     sameSite: 'strict'
 }))
@@ -60,6 +60,7 @@ app.use(async (ctx, next) => {
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)
@@ -83,6 +84,15 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(routers.routes()).use(routers.allowedMethods())
+
+// app.use(
+//     koaSwagger({
+//         routePrefix: '/swagger', // host at /swagger instead of default /docs
+//         swaggerOptions: {
+//             url: 'http://127.0.0.1:3000/swagger.json', // example path to json
+//         },
+//     }),
+// )
 
 
 
