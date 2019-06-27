@@ -5,6 +5,8 @@ branches:
   only:
   - master
   - auth
+services:
+  - mongodb
 node_js:
   - '10'
 cache:
@@ -16,7 +18,11 @@ before_install:
   - chmod 600 ~/.ssh/id_rsa
 install:
   - npm install
-before_script: sudo redis-server /etc/redis/redis.conf --requirepass  $redis_password
+before_script: 
+  - sudo redis-server /etc/redis/redis.conf --requirepass  $redis_password
+  - mkdir -p data/db
+  - mongod --dbpath=data/db &
+  - sleep 2
 script:
   npm test
 deploy:

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "set NODE_ENV=production && node bin/www",
     "dev": "set NODE_ENV=development && nodemon  bin/www",
-    "test": "set NODE_ENV=development && mocha -t 10000 ./test/api/*.js --exit",
+    "test": "set NODE_ENV=development && mocha -t 20000 ./test/api/*.js --exit",
     "prd": "pm2 start bin/www"
   },
   "dependencies": {
