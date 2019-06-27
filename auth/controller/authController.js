@@ -6,7 +6,7 @@ module.exports = {
             data: null
         }
 
-        console.log(ctx.state.passport)
+        // console.log(ctx.state.passport)
         ctx.session.user = `weibo${ctx.state.passport.body.id}`
         ctx.session.nickName = ctx.state.passport.body.screen_name
         body.data = {

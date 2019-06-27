@@ -1,0 +1,545 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "滚雪球后端服务",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "mingdu@foxmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "gunxueqiu.site",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "user",
+      "description": "Operations about user",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/user/saveOptStocks.json": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "保存用户选择的自选股代码",
+        "description": "限定登陆用户1",
+        "operationId": "createUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "自选股代码(示例：600030,600177)",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/optStockParam"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    },
+    "/user/queryOptStocks.json": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "查询用户选择的自选股代码列表",
+        "description": "限定登陆用户",
+        "operationId": "queryOptStocks",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    },
+    "/user/queryOptGridInfo.json": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "查询用户设定指数网格信息",
+        "description": "限定登陆用户",
+        "operationId": "queryOptGridInfo",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiGridResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    },
+    "/user/saveOptGridInfo.json": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "保存用户设置的网格参数信息",
+        "description": "限定登陆用户",
+        "operationId": "saveOptGridInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "order placed for purchasing the pet",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/optGrid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiGridResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    },
+    "/user/saveOptStockDealDetail.json": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "保存用户设置的个股止盈止损信息",
+        "description": "限定登陆用户",
+        "operationId": "saveOptStockDealDetail",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "包含已止盈次数、已补仓次数、买入成本",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/stockDealDetail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiStockDealDetailResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    },
+    "/user/queryOptStockDealDetail.json": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "查询用户设定的个股止盈补仓数据",
+        "description": "限定登陆用户",
+        "operationId": "queryOptStockDealDetail",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiStockDealDetailResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    },
+    "/user/queryStopProfitThreshold.json": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "查询用户设定的个股止盈阈值",
+        "description": "限定登陆用户（界面上提供50或者100两个选项）",
+        "operationId": "queryStopProfitThreshold",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiProfitThreshResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    },
+    "/user/saveStopProfitThreshold.json": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "保存用户设置的个股止盈阈值",
+        "description": "限定登陆用户",
+        "operationId": "saveStopProfitThreshold",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "设置止盈阈值",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profitThresh"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiProfitThreshResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    },
+    "/user/saveOptCbs.json": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "保存用户选择的自选转债代码",
+        "description": "限定登陆用户",
+        "operationId": "saveOptCbs",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "codes",
+            "description": "自选转债代码(示例：113068,113069)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiOptCbResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    },
+    "/user/queryOptCbs.json": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "查询用户选择的自选转债代码列表",
+        "description": "限定登陆用户",
+        "operationId": "queryOptCbs",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiOptCbResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "optStock": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "用户id"
+        },
+        "stock": {
+          "type": "string",
+          "example": "600030,002014,000800,300104"
+        }
+      }
+    },
+    "optStockParam": {
+      "type": "object",
+      "properties": {
+        "stock": {
+          "type": "string",
+          "example": "600030,002014,000800,300104"
+        }
+      }
+    },
+    "optGrid": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "用户id"
+        },
+        "code": {
+          "type": "string",
+          "example": "指数代码（399500）"
+        },
+        "gap": {
+          "type": "string",
+          "example": "网格每格间距（0-100）"
+        },
+        "low": {
+          "type": "string",
+          "example": "当前已投最低一格基金价格或者指数点位（4000）"
+        },
+        "user": {
+          "type": "string",
+          "example": "用户id"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/optStock"
+          }
+        }
+      }
+    },
+    "ApiGridResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/optGrid"
+          }
+        }
+      }
+    },
+    "ApiStockDealDetailResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/stockDealDetail"
+          }
+        }
+      }
+    },
+    "stockDealDetail": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "用户id"
+        },
+        "code": {
+          "type": "string",
+          "example": "600030"
+        },
+        "coverTime": {
+          "type": "string",
+          "example": "已补仓次数（0）"
+        },
+        "profitTime": {
+          "type": "string",
+          "example": "已止盈次数（1）"
+        },
+        "cost": {
+          "type": "string",
+          "example": "买入成本价"
+        }
+      }
+    },
+    "ApiProfitThreshResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/profitThresh"
+          }
+        }
+      }
+    },
+    "profitThresh": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "用户id"
+        },
+        "threshold": {
+          "type": "string",
+          "example": "阈值(0-100)"
+        }
+      }
+    },
+    "optCb": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "用户id"
+        },
+        "cb": {
+          "type": "string",
+          "example": "600030,002014,000800,300104"
+        }
+      }
+    },
+    "ApiOptCbResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/optCb"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

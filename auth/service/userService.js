@@ -1,5 +1,5 @@
 const mongdb = require('../../db/mongdb')
-
+const Joi = require('@hapi/joi')
 
 module.exports = {
     /**
@@ -7,13 +7,17 @@ module.exports = {
      * @param {codes需要把全量的自选股代码拼接起来发到后端} formData 
      */
     async saveOptStocks(formData, user) {
+        const schema = Joi.object().keys({
+            codes: Joi.string().regex(/^([0-9]{6},?)+$/).regex(/[^,]$/).required()
+        })
+        const result = Joi.validate({ codes: formData.codes }, schema)
         let body = {
             code: 1,
             msg: 'ok',
             data: null
         }
-        if (!formData || !formData.codes) {
-            throw new Error('codes is null')
+        if (result.error !== null) {
+            throw result.error
         }
         const codes = formData.codes
         await mongdb.updateOne('stock', 'optStock', { '_id': `${user}` }, { 'stock': codes }, true)
@@ -39,9 +43,17 @@ module.exports = {
      * @param {*} user 
      */
     async saveOptStockDealDetail(formData, user) {
-        if (!formData.code) {
-            throw new Error('code is null')
+        const schema = Joi.object().keys({
+            code: Joi.string().regex(/^([0-9]{6}){1}$/).required(),
+            coverTime: Joi.number().integer().min(0),
+            profitTime: Joi.number().integer().min(0)
+        }).or('coverTime', 'profitTime')
+        const result = Joi.validate(formData, schema)
+
+        if (result.error !== null) {
+            throw result.error
         }
+
         let body = {
             code: 1,
             msg: 'ok',
@@ -87,9 +99,17 @@ module.exports = {
      * @param {*} user 
      */
     async saveOptGridInfo(formData, user) {
-        if (!formData.code) {
-            throw new Error('code is null')
+        const schema = Joi.object().keys({
+            code: Joi.string().regex(/^([0-9]{6}){1}$/).required(),
+            gap: Joi.number().min(0).max(100),
+            low: Joi.number().min(0)
+        })
+        const result = Joi.validate(formData, schema)
+
+        if (result.error !== null) {
+            throw result.error
         }
+
         let body = {
             code: 1,
             msg: 'ok',
@@ -142,14 +162,15 @@ module.exports = {
         return body
     },
     async saveStopProfitThreshold(formData, user) {
-        let body = {
-            code: 1,
-            msg: 'ok',
-            data: null
+        const schema = Joi.object().keys({
+            threshold: Joi.number().min(0).max(100)
+        })
+        const result = Joi.validate(formData, schema)
+
+        if (result.error !== null) {
+            throw result.error
         }
-        if (!formData.threshold) {
-            throw new Error('threshold is null')
-        }
+
         await mongdb.updateOne('stock', 'stopProfitThreshold', { '_id': `${user}` }, { 'threshold': formData.threshold }, true)
         return body
     },
@@ -159,13 +180,17 @@ module.exports = {
      * @param {*} user 
      */
     async saveOptCbs(formData, user) {
+        const schema = Joi.object().keys({
+            codes: Joi.string().regex(/^([0-9]{6},?)+$/).regex(/[^,]$/).required()
+        })
+        const result = Joi.validate({ codes: formData.codes }, schema)
         let body = {
             code: 1,
             msg: 'ok',
             data: null
         }
-        if (!formData || !formData.codes) {
-            throw new Error('codes is null')
+        if (result.error !== null) {
+            throw result.error
         }
         const codes = formData.codes
         await mongdb.updateOne('stock', 'optCb', { '_id': `${user}` }, { 'cb': codes }, true)

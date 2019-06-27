@@ -10,6 +10,7 @@ const Sentry = require('@sentry/node')
 const session = require("koa-session2")
 const Store = require("./auth/store/Store")
 const config = require("./config")
+const koaSwagger = require('koa2-swagger-ui')
 
 const app = new Koa()
 // error handler
@@ -39,6 +40,11 @@ app.use(session({
 app.use(async (ctx, next) => {
     if (!ctx.session.user && ctx.path.includes('/user')) {
         ctx.status = 403
+        ctx.body = {
+            code: -1,
+            msg: '用户未登陆',
+            data: null
+        }
         return
     }
     await next()
@@ -75,7 +81,7 @@ app.use(async (ctx, next) => {
         ctx.status = 500
         ctx.body = {
             code: -1,
-            message: err.message,
+            msg: err.message,
             data: null
         }
         ctx.app.emit('error', err, ctx)
@@ -85,14 +91,14 @@ app.use(async (ctx, next) => {
 // routes
 app.use(routers.routes()).use(routers.allowedMethods())
 
-// app.use(
-//     koaSwagger({
-//         routePrefix: '/swagger', // host at /swagger instead of default /docs
-//         swaggerOptions: {
-//             url: 'http://127.0.0.1:3000/swagger.json', // example path to json
-//         },
-//     }),
-// )
+app.use(
+    koaSwagger({
+        routePrefix: '/swagger', // host at /swagger instead of default /docs
+        swaggerOptions: {
+            url: 'http://127.0.0.1:3000/swagger.json', // example path to json
+        },
+    }),
+)
 
 
 

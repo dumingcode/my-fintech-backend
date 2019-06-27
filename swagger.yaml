@@ -26,7 +26,7 @@ paths:
       tags:
         - user
       summary: 保存用户选择的自选股代码
-      description: 限定登陆用户
+      description: 限定登陆用户1
       operationId: createUser
       consumes:
         - "application/x-www-form-urlencoded"
@@ -100,128 +100,124 @@ paths:
             $ref: "#/definitions/ApiGridResponse"
         403:
           description: "用户未登陆"
-  /user/login:
+  /user/saveOptStockDealDetail.json:
+    post:
+      tags:
+        - user
+      summary: "保存用户设置的个股止盈止损信息"
+      description: "限定登陆用户"
+      operationId: "saveOptStockDealDetail"
+      produces:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "包含已止盈次数、已补仓次数、买入成本"
+        required: true
+        schema:
+          $ref: "#/definitions/stockDealDetail"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiStockDealDetailResponse"
+        403:
+          description: "用户未登陆"
+  /user/queryOptStockDealDetail.json:
     get:
       tags:
         - user
-      summary: Logs user into the system
-      description: ''
-      operationId: loginUser
+      summary: "查询用户设定的个股止盈补仓数据"
+      description: "限定登陆用户"
+      operationId: "queryOptStockDealDetail"
       produces:
-        - application/xml
         - application/json
-      parameters:
-        - name: username
-          in: query
-          description: The user name for login
-          required: true
-          type: string
-        - name: password
-          in: query
-          description: The password for login in clear text
-          required: true
-          type: string
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: "successful operation"
           schema:
-            type: string
-          headers:
-            X-Rate-Limit:
-              type: integer
-              format: int32
-              description: calls per hour allowed by the user
-            X-Expires-After:
-              type: string
-              format: date-time
-              description: date in UTC when token expires
-        '400':
-          description: Invalid username/password supplied
-  /user/logout:
+            $ref: "#/definitions/ApiStockDealDetailResponse"
+        403:
+          description: "用户未登陆"
+  /user/queryStopProfitThreshold.json:
     get:
       tags:
         - user
-      summary: Logs out current logged in user session
-      description: ''
-      operationId: logoutUser
+      summary: "查询用户设定的个股止盈阈值"
+      description: "限定登陆用户（界面上提供50或者100两个选项）"
+      operationId: "queryStopProfitThreshold"
       produces:
-        - application/xml
         - application/json
-      parameters: []
       responses:
-        default:
-          description: successful operation
-  '/user/{username}':
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiProfitThreshResponse"
+        403:
+          description: "用户未登陆"
+  /user/saveStopProfitThreshold.json:
+    post:
+      tags:
+        - user
+      summary: "保存用户设置的个股止盈阈值"
+      description: "限定登陆用户"
+      operationId: "saveStopProfitThreshold"
+      produces:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "设置止盈阈值"
+        required: true
+        schema:
+          $ref: "#/definitions/profitThresh"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiProfitThreshResponse"
+        403:
+          description: "用户未登陆"
+  /user/saveOptCbs.json:
+    post:
+      tags:
+        - user
+      summary: 保存用户选择的自选转债代码
+      description: 限定登陆用户
+      operationId: "saveOptCbs"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: codes
+          description: 自选转债代码(示例：113068,113069)
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiOptCbResponse"
+        403:
+          description: "用户未登陆"
+  /user/queryOptCbs.json:
     get:
       tags:
         - user
-      summary: Get user by user name
-      description: ''
-      operationId: getUserByName
+      summary: "查询用户选择的自选转债代码列表"
+      description: "限定登陆用户"
+      operationId: "queryOptCbs"
       produces:
-        - application/xml
         - application/json
-      parameters:
-        - name: username
-          in: path
-          description: 'The name that needs to be fetched. Use user1 for testing. '
-          required: true
-          type: string
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: "successful operation"
           schema:
-            $ref: '#/definitions/User'
-        '400':
-          description: Invalid username supplied
-        '404':
-          description: User not found
-    put:
-      tags:
-        - user
-      summary: Updated user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      produces:
-        - application/xml
-        - application/json
-      parameters:
-        - name: username
-          in: path
-          description: name that need to be updated
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Updated user object
-          required: true
-          schema:
-            $ref: '#/definitions/User'
-      responses:
-        '400':
-          description: Invalid user supplied
-        '404':
-          description: User not found
-    delete:
-      tags:
-        - user
-      summary: Delete user
-      description: This can only be done by the logged in user.
-      operationId: deleteUser
-      produces:
-        - application/xml
-        - application/json
-      parameters:
-        - name: username
-          in: path
-          description: The name that needs to be deleted
-          required: true
-          type: string
-      responses:
-        '400':
-          description: Invalid username supplied
-        '404':
-          description: User not found
+            $ref: "#/definitions/ApiOptCbResponse"
+        403:
+          description: "用户未登陆"
 securityDefinitions:
   petstore_auth:
     type: oauth2
@@ -235,30 +231,6 @@ securityDefinitions:
     name: api_key
     in: header
 definitions:
-  User:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      username:
-        type: string
-      optStocks:
-        type: string
-      lastName:
-        type: string
-      email:
-        type: string
-      password:
-        type: string
-      phone:
-        type: string
-      userStatus:
-        type: integer
-        format: int32
-        description: User Status
-    xml:
-      name: User
   optStock:
     type: "object"
     properties:
@@ -312,8 +284,81 @@ definitions:
         type: "array"
         items:
             $ref: "#/definitions/optGrid"
-
-  
+  ApiStockDealDetailResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+        example: 1
+      msg:
+        type: "string"
+      data:
+        type: "array"
+        items:
+            $ref: "#/definitions/stockDealDetail"
+  stockDealDetail:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        example: "用户id"
+      code:
+        type: "string"
+        example: "600030"
+      coverTime:
+        type: "string"
+        example: "已补仓次数（0）"
+      profitTime:
+        type: "string"
+        example: "已止盈次数（1）"
+      cost:
+        type: "string"
+        example: "买入成本价"
+  ApiProfitThreshResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+        example: 1
+      msg:
+        type: "string"
+      data:
+        type: "array"
+        items:
+            $ref: "#/definitions/profitThresh"
+  profitThresh:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        example: "用户id"
+      threshold:
+        type: "string"
+        example: "阈值(0-100)"
+  optCb:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        example: "用户id"
+      stock:
+        type: "string"
+        example: "600030,002014,000800,300104"
+  ApiOptCbResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+        example: 1
+      msg:
+        type: "string"
+      data:
+        type: "array"
+        items:
+            $ref: "#/definitions/optStock"
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'

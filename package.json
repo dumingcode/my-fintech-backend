@@ -5,12 +5,14 @@
   "scripts": {
     "start": "set NODE_ENV=production && node bin/www",
     "dev": "set NODE_ENV=development && nodemon  bin/www",
+    "test": "set NODE_ENV=development && mocha -t 10000 ./test/api/*.js --exit",
     "prd": "pm2 start bin/www"
   },
   "dependencies": {
     "@hapi/joi": "^15.1.0",
     "@sentry/node": "^5.4.3",
     "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
     "bunyan": "^1.8.12",
     "debug": "^4.1.1",
     "iconv-lite": "^0.4.24",

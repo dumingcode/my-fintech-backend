@@ -6,7 +6,7 @@ module.exports = {
      */
     async saveOptStocks(ctx) {
         ctx.session.refresh()
-        let body = await userService.saveOptStocks(ctx.request.query, ctx.session.user)
+        let body = await userService.saveOptStocks(ctx.request.body, ctx.session.user)
         if (body.code > 0) {
             const optStocks = await userService.queryOptStocks(ctx.session.user)
             ctx.session.optStocks = optStocks.data
@@ -32,7 +32,7 @@ module.exports = {
      */
     async saveOptGridInfo(ctx) {
         ctx.session.refresh()
-        let body = await userService.saveOptGridInfo(ctx.request.query, ctx.session.user)
+        let body = await userService.saveOptGridInfo(ctx.request.body, ctx.session.user)
         const optGrid = await userService.queryOptGridInfo(ctx.session.user)
         ctx.session.optGrid = optGrid.data
         body.data = optGrid.data
@@ -57,7 +57,7 @@ module.exports = {
      */
     async saveOptStockDealDetail(ctx) {
         ctx.session.refresh()
-        let body = await userService.saveOptStockDealDetail(ctx.request.query, ctx.session.user)
+        let body = await userService.saveOptStockDealDetail(ctx.request.body, ctx.session.user)
         const stockDealDetail = await userService.queryOptStockDealDetail(ctx.session.user)
         ctx.session.stockDealDetail = stockDealDetail.data
         body.data = stockDealDetail.data
@@ -87,7 +87,7 @@ module.exports = {
     },
     async saveStopProfitThreshold(ctx) {
         ctx.session.refresh()
-        let body = await userService.saveStopProfitThreshold(ctx.request.query, ctx.session.user)
+        let body = await userService.saveStopProfitThreshold(ctx.request.body, ctx.session.user)
         const profitThreshold = await userService.queryStopProfitThreshold(ctx.session.user)
         ctx.session.profitThreshold = profitThreshold.data
         body.data = profitThreshold.data
@@ -99,7 +99,7 @@ module.exports = {
      */
     async saveOptCbs(ctx) {
         ctx.session.refresh()
-        let body = await userService.saveOptCbs(ctx.request.query, ctx.session.user)
+        let body = await userService.saveOptCbs(ctx.request.body, ctx.session.user)
         if (body.code > 0) {
             const optCbs = await userService.queryOptCbs(ctx.session.user)
             ctx.session.optCbs = optCbs.data
