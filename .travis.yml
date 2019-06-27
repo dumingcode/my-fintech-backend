@@ -4,6 +4,7 @@ language: node_js
 branches:
   only:
   - master
+  - auth
 node_js:
   - '10'
 cache:
@@ -16,6 +17,8 @@ before_install:
 install:
   - npm install
 before_script: sudo redis-server /etc/redis/redis.conf --requirepass  $redis_password
+script:
+  npm test
 deploy:
   provider: script
   skip_cleanup: true
