@@ -209,8 +209,17 @@ module.exports = {
         const optCb = await mongdb.queryDoc('stock', 'optCb', { '_id': `${user}` })
         body.data = optCb
         return body
-    }
-
+    },
+    async queryUserInfo(user) {
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        const userinfo = await mongdb.queryDoc('stock', 'userinfo', { '_id': `${user}` })
+        body.data = userinfo
+        return body
+    },
 
 
 

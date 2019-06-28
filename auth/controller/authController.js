@@ -1,19 +1,21 @@
+const authService = require('../service/authService')
 module.exports = {
-    weiboCallback(ctx) {
+    async weiboCallback(ctx) {
         let body = {
             code: 1,
             msg: 'ok',
             data: null
         }
 
-        // console.log(ctx.state.passport)
         ctx.session.user = `weibo${ctx.state.passport.body.id}`
-        ctx.session.nickName = ctx.state.passport.body.screen_name
-        body.data = {
+        ctx.session.userInfo = {
             'nickName': ctx.state.passport.body.screen_name,
-            'uid': ctx.state.passport.body.id,
-            'profile_image_url': ctx.state.passport.body.profile_image_url
+            'location': ctx.state.passport.body.location,
+            'profile_image_url': ctx.state.passport.body.profile_image_url,
+            'uid': `weibo${ctx.state.passport.body.id}`
         }
+        await authService.saveUserInfo(ctx.session.userInfo)
+        body.data = ctx.session.userInfo
         ctx.body = body
     },
     logout(ctx) {

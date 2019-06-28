@@ -16,6 +16,7 @@ const routers =
         .post('user/saveOptCbs.json', userController.saveOptCbs)
         .get('user/queryOptCbs.json', userController.queryOptCbs)
         .get('user/saveOptCbs.json', userController.saveOptCbs)
+        .get('user/queryUserInfo.json', userController.queryUserInfo)
 
 
 

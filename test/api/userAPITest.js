@@ -716,5 +716,41 @@ describe('User API', function () {
 
     })
 
+    describe('查询用户个人信息', function () {
+        it('happy path ，状态200 返回正确结果', function (done) {
+            request
+                .get('/user/queryUserInfo.json')
+                .set('Cookie', ['SESSIONID=f60bdcb8b472373a997dde2b687f3e0dbbeed6abc2720cd2'])
+                .expect('Content-Type', /json/)
+                .set('Accept', 'application/json')
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err)
+                    }
+                    assert.equal(res.body.code, 1)
+                    assert.equal(res.body.msg, 'ok')
+                    expect(res.body.data).to.not.have.lengthOf(0)
+                    return done()
+                })
+        })
+
+        it('用户cookie为空，期待返回403错误', function (done) {
+            request
+                .get('/user/queryUserInfo.json')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(403)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err)
+                    }
+                    assert.equal(res.body.msg, '用户未登陆')
+                    return done()
+                })
+        })
+    })
+
+
 
 })

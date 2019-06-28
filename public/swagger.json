@@ -325,6 +325,30 @@
           }
         }
       }
+    },
+    "/user/queryUserInfo.json": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "查询用户个人信息（昵称、照片、location）",
+        "description": "限定登陆用户",
+        "operationId": "queryUserInfo",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiUserResponse"
+            }
+          },
+          "403": {
+            "description": "用户未登陆"
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -533,6 +557,59 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/optCb"
+          }
+        }
+      }
+    },
+    "UserInfo": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "用户id"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "time": {
+              "type": "string",
+              "example": "用户信息保存时间2019-06-28 11:09:58"
+            },
+            "nickName": {
+              "type": "string",
+              "example": "用户昵称"
+            },
+            "location": {
+              "type": "string",
+              "example": "用户所在地"
+            },
+            "profile_image_url": {
+              "type": "string",
+              "example": "用户头像"
+            },
+            "uid": {
+              "type": "string",
+              "example": "用户id"
+            }
+          }
+        }
+      }
+    },
+    "ApiUserResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserInfo"
           }
         }
       }

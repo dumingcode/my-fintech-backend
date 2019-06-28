@@ -118,5 +118,14 @@ module.exports = {
         } else {
             ctx.body = { code: 1, msg: 'ok', data: ctx.session.optCbs }
         }
+    },
+    async queryUserInfo(ctx) {
+        ctx.session.refresh()
+        if (!ctx.session.userInfo) {
+            const body = await userService.queryUserInfo(ctx.session.user)
+            ctx.body = body
+        } else {
+            ctx.body = { code: 1, msg: 'ok', data: ctx.session.userInfo }
+        }
     }
 }
