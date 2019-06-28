@@ -19,7 +19,7 @@ before_install:
 install:
   - npm install
 before_script: 
-  - sudo redis-server /etc/redis/redis.conf --requirepass  $redis_password
+  - sudo redis-server /etc/redis/redis.conf
   - mkdir -p data/db
   - mongod --dbpath=data/db &
   - sleep 2
