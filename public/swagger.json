@@ -59,7 +59,7 @@
               "$ref": "#/definitions/ApiResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -83,7 +83,7 @@
               "$ref": "#/definitions/ApiResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -107,7 +107,7 @@
               "$ref": "#/definitions/ApiGridResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -142,7 +142,7 @@
               "$ref": "#/definitions/ApiGridResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -177,7 +177,7 @@
               "$ref": "#/definitions/ApiStockDealDetailResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -201,7 +201,7 @@
               "$ref": "#/definitions/ApiStockDealDetailResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -225,7 +225,7 @@
               "$ref": "#/definitions/ApiProfitThreshResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -260,7 +260,7 @@
               "$ref": "#/definitions/ApiProfitThreshResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -296,7 +296,7 @@
               "$ref": "#/definitions/ApiOptCbResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -320,7 +320,7 @@
               "$ref": "#/definitions/ApiOptCbResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }
@@ -344,7 +344,7 @@
               "$ref": "#/definitions/ApiUserResponse"
             }
           },
-          "403": {
+          "401": {
             "description": "用户未登陆"
           }
         }

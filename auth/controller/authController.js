@@ -19,26 +19,34 @@ module.exports = {
         ctx.body = body
     },
     logout(ctx) {
-        if (!ctx.session.user) {
-            ctx.body = 'already logout'
-            return
-        }
-        ctx.session = {}
-        ctx.body = '已登出'
-    },
-    loginTest(ctx) {
         let body = {
             code: 1,
             msg: 'ok',
             data: null
         }
-        ctx.session.user = 'test'
-        ctx.session.nickName = 'jake1036'
-        body.data = {
-            'nickName': ctx.session.nickName,
-            'uid': ctx.session.user,
-            'profile_image_url': 'http://tp1.sinaimg.cn/1404376560/50/0/1'
+        if (!ctx.session.user) {
+            body.code = -1
+            body.msg = '已退出'
+            ctx.body = body
+            return
         }
+        ctx.session = {}
+        ctx.body = body
+    },
+    async loginTest(ctx) {
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        ctx.session.user = 'local26323'
+        ctx.session.userInfo = {
+            'nickName': 'jake1036',
+            'location': 'beijing',
+            'profile_image_url': 'http://tp1.sinaimg.cn/1404376560/50/0/1',
+            'uid': `local26323`
+        }
+        await authService.saveUserInfo(ctx.session.userInfo)
         ctx.body = body
     }
 }

@@ -1,168 +1,135 @@
-
-
-  User API
-    保存用户个人自选股列表
-  <-- POST /user/saveOptStocks.json
-POST /user/saveOptStocks.json - 28ms
-  --> POST /user/saveOptStocks.json 500 48ms 85b
-      √ 参数codes为空，期待返回500错误 (85ms)
-      √ 用户cookie为空，期待返回403错误
-  <-- POST /user/saveOptStocks.json
-POST /user/saveOptStocks.json - 11ms
-  --> POST /user/saveOptStocks.json 500 13ms 170b
-      √ codes格式输入错误-包含英文，期待拦截请求返回500错误
-  <-- POST /user/saveOptStocks.json
-POST /user/saveOptStocks.json - 9ms
-  --> POST /user/saveOptStocks.json 500 11ms 169b
+User API
+保存用户个人自选股列表
+<-- POST /user/saveOptStocks.json POST /user/saveOptStocks.json - 28ms --> POST /user/saveOptStocks.json 500 48ms 85b
+  √ 参数codes为空，期待返回500错误 (85ms)
+  √ 用户cookie为空，期待返回401错误
+  <-- POST /user/saveOptStocks.json POST /user/saveOptStocks.json - 11ms --> POST /user/saveOptStocks.json 500 13ms 170b
+    √ codes格式输入错误-包含英文，期待拦截请求返回500错误
+    <-- POST /user/saveOptStocks.json POST /user/saveOptStocks.json - 9ms --> POST /user/saveOptStocks.json 500 11ms
+      169b
       √ codes格式输入错误-股票代码不为6位数字，期待拦截请求返回500错误
-  <-- POST /user/saveOptStocks.json
-POST /user/saveOptStocks.json - 19ms
-  --> POST /user/saveOptStocks.json 500 21ms 155b
-      √ codes格式输入错误-最后一位多了个逗号，期待拦截请求返回500错误
-  <-- POST /user/saveOptStocks.json
-POST /user/saveOptStocks.json - 11ms
-  --> POST /user/saveOptStocks.json 500 13ms 158b
-      √ codes格式输入错误-中间2个逗号间不存在股票代码，期待拦截请求返回500错误
-  <-- POST /user/saveOptStocks.json
-POST /user/saveOptStocks.json - 13ms
-  --> POST /user/saveOptStocks.json 500 15ms 165b
-      √ codes格式输入错误-最开始是一个逗号，期待拦截请求返回500错误
-  <-- POST /user/saveOptStocks.json
-POST /user/saveOptStocks.json - 29ms
-  --> POST /user/saveOptStocks.json 200 30ms 83b
-      √ happy path 正确设置自选股代码，期待返回的自选股代码同参数中的相同
-    查询用户个人自选股列表
-  <-- GET /user/queryOptStocks.json
-GET /user/queryOptStocks.json - 0ms
-  --> GET /user/queryOptStocks.json 200 5ms 83b
-      √ happy path ，期待得到正确结果600030,002014,000800,300104
-      √ 用户cookie为空，期待返回403错误
-    保存用户设置的网格参数信息
-  <-- POST /user/saveOptGridInfo.json
-POST /user/saveOptGridInfo.json - 9ms
-  --> POST /user/saveOptGridInfo.json 200 10ms 240b
-      √ happy path，期待返回200状态 返回的网格信息参数与设置的一样
-      √ 用户未登陆，期待返回403错误
-  <-- POST /user/saveOptGridInfo.json
-POST /user/saveOptGridInfo.json - 11ms
-  --> POST /user/saveOptGridInfo.json 500 12ms 83b
-      √ 参数输入错误-code未输入，期待返回500状态 
-  <-- POST /user/saveOptGridInfo.json
-POST /user/saveOptGridInfo.json - 11ms
-  --> POST /user/saveOptGridInfo.json 500 12ms 86b
-      √ 参数输入错误-gap输入不为数字，期待返回200状态 返回的网格信息参数与设置的一样
-  <-- POST /user/saveOptGridInfo.json
-POST /user/saveOptGridInfo.json - 11ms
-  --> POST /user/saveOptGridInfo.json 500 13ms 103b
-      √ 参数输入错误-gap输入不超过允许范围，期待返回200状态 返回的网格信息参数与设置的一样
-  <-- POST /user/saveOptGridInfo.json
-POST /user/saveOptGridInfo.json - 19ms
-  --> POST /user/saveOptGridInfo.json 500 21ms 86b
-      √ 参数输入错误-gap输入不为数字，期待返回200状态 返回的网格信息参数与设置的一样
-  <-- POST /user/saveOptGridInfo.json
-POST /user/saveOptGridInfo.json - 9ms
-  --> POST /user/saveOptGridInfo.json 500 12ms 103b
-      √ 参数输入错误-gap输入不超过允许范围，期待返回200状态 返回的网格信息参数与设置的一样
-    查询用户设定的指数网格数据信息
-  <-- GET /user/queryOptGridInfo.json
-GET /user/queryOptGridInfo.json - 0ms
-  --> GET /user/queryOptGridInfo.json 200 2ms 240b
-      √ happy path ，期待得到正确结果
-      √ 用户cookie为空，期待返回403错误
-    查询用户设定的个股止盈补仓数据信息
-  <-- GET /user/queryOptStockDealDetail.json
-GET /user/queryOptStockDealDetail.json - 0ms
-  --> GET /user/queryOptStockDealDetail.json 200 2ms 192b
-      √ happy path ，期待得到正确结果
-      √ 用户cookie为空，期待返回403错误
-    保存用户设置的个股止盈止损信息
-      √ 用户未登陆，期待返回403错误
-  <-- POST /user/saveOptStockDealDetail.json
-POST /user/saveOptStockDealDetail.json - 13ms
-  --> POST /user/saveOptStockDealDetail.json 500 14ms 83b
-      √ 参数输入错误-code未输入，期待返回500状态 
-  <-- POST /user/saveOptStockDealDetail.json
-POST /user/saveOptStockDealDetail.json - 22ms
-  --> POST /user/saveOptStockDealDetail.json 500 24ms 98b
-      √ 参数输入错误-coverTime输入不为数字，期待返回500状态
-  <-- POST /user/saveOptStockDealDetail.json
-POST /user/saveOptStockDealDetail.json - 9ms
-  --> POST /user/saveOptStockDealDetail.json 500 11ms 100b
-      √ 参数输入错误-profitTime输入不为数字，期待返回500状态
-  <-- POST /user/saveOptStockDealDetail.json
-POST /user/saveOptStockDealDetail.json - 9ms
-  --> POST /user/saveOptStockDealDetail.json 500 11ms 94b
-      √ 参数输入错误-止盈次数和止损次数都不输入，期待返回500状态
-  <-- POST /user/saveOptStockDealDetail.json
-POST /user/saveOptStockDealDetail.json - 7ms
-  --> POST /user/saveOptStockDealDetail.json 200 9ms 192b
-      √ happy path，期待返回200状态 返回的个股止盈补仓数据条数大于1
-    保存用户个人自选转债列表
-  <-- POST /user/saveOptCbs.json
-POST /user/saveOptCbs.json - 11ms
-  --> POST /user/saveOptCbs.json 500 13ms 85b
-      √ 参数codes为空，期待返回500错误
-      √ 用户cookie为空，期待返回403错误
-  <-- POST /user/saveOptCbs.json
-POST /user/saveOptCbs.json - 10ms
-  --> POST /user/saveOptCbs.json 500 14ms 170b
-      √ codes格式输入错误-包含英文，期待拦截请求返回500错误
-  <-- POST /user/saveOptCbs.json
-POST /user/saveOptCbs.json - 9ms
-  --> POST /user/saveOptCbs.json 500 12ms 169b
-      √ codes格式输入错误-股票代码不为6位数字，期待拦截请求返回500错误
-  <-- POST /user/saveOptCbs.json
-POST /user/saveOptCbs.json - 20ms
-  --> POST /user/saveOptCbs.json 500 23ms 155b
-      √ codes格式输入错误-最后一位多了个逗号，期待拦截请求返回500错误
-  <-- POST /user/saveOptCbs.json
-POST /user/saveOptCbs.json - 10ms
-  --> POST /user/saveOptCbs.json 500 12ms 158b
-      √ codes格式输入错误-中间2个逗号间不存在股票代码，期待拦截请求返回500错误
-  <-- POST /user/saveOptCbs.json
-POST /user/saveOptCbs.json - 11ms
-  --> POST /user/saveOptCbs.json 500 13ms 165b
-      √ codes格式输入错误-最开始是一个逗号，期待拦截请求返回500错误
-  <-- POST /user/saveOptCbs.json
-POST /user/saveOptCbs.json - 8ms
-  --> POST /user/saveOptCbs.json 200 10ms 80b
-      √ happy path 正确设置自选股代码，期待返回的自选股代码同参数中的相同
-    查询用户个人自选转债列表
-  <-- GET /user/queryOptCbs.json
-GET /user/queryOptCbs.json - 1ms
-  --> GET /user/queryOptCbs.json 200 2ms 80b
-      √ happy path ，期待得到正确结果600030,002014,000800,300104
-      √ 用户cookie为空，期待返回403错误
-    查询用户设定的个股止盈阈值
-  <-- GET /user/queryStopProfitThreshold.json
-GET /user/queryStopProfitThreshold.json - 0ms
-  --> GET /user/queryStopProfitThreshold.json 200 2ms 62b
-      √ happy path ，状态200 返回正确结果
-      √ 用户cookie为空，期待返回403错误
-    保存用户设置个股止盈阈值
-      √ happy path，状态200 返回正确结果
-  <-- POST /user/saveStopProfitThreshold.json
-POST /user/saveStopProfitThreshold.json - 5ms
-  --> POST /user/saveStopProfitThreshold.json 500 9ms 51b
-      √ 参数threshold为空，期待返回500错误
-      √ 用户cookie为空，期待返回403错误
-  <-- POST /user/saveStopProfitThreshold.json
-POST /user/saveStopProfitThreshold.json - 9ms
-  --> POST /user/saveStopProfitThreshold.json 500 11ms 98b
-      √ codes格式输入错误-包含英文，期待拦截请求返回500错误
-    查询用户个人信息
-  <-- GET /user/queryUserInfo.json
-GET /user/queryUserInfo.json - 3ms
-  --> GET /user/queryUserInfo.json 200 4ms 199b
-      √ happy path ，状态200 返回正确结果
-      √ 用户cookie为空，期待返回403错误
+      <-- POST /user/saveOptStocks.json POST /user/saveOptStocks.json - 19ms --> POST /user/saveOptStocks.json 500 21ms
+        155b
+        √ codes格式输入错误-最后一位多了个逗号，期待拦截请求返回500错误
+        <-- POST /user/saveOptStocks.json POST /user/saveOptStocks.json - 11ms --> POST /user/saveOptStocks.json 500
+          13ms 158b
+          √ codes格式输入错误-中间2个逗号间不存在股票代码，期待拦截请求返回500错误
+          <-- POST /user/saveOptStocks.json POST /user/saveOptStocks.json - 13ms --> POST /user/saveOptStocks.json 500
+            15ms 165b
+            √ codes格式输入错误-最开始是一个逗号，期待拦截请求返回500错误
+            <-- POST /user/saveOptStocks.json POST /user/saveOptStocks.json - 29ms --> POST /user/saveOptStocks.json 200
+              30ms 83b
+              √ happy path 正确设置自选股代码，期待返回的自选股代码同参数中的相同
+              查询用户个人自选股列表
+              <-- GET /user/queryOptStocks.json GET /user/queryOptStocks.json - 0ms --> GET /user/queryOptStocks.json
+                200 5ms 83b
+                √ happy path ，期待得到正确结果600030,002014,000800,300104
+                √ 用户cookie为空，期待返回401错误
+                保存用户设置的网格参数信息
+                <-- POST /user/saveOptGridInfo.json POST /user/saveOptGridInfo.json - 9ms --> POST
+                  /user/saveOptGridInfo.json 200 10ms 240b
+                  √ happy path，期待返回200状态 返回的网格信息参数与设置的一样
+                  √ 用户未登陆，期待返回401错误
+                  <-- POST /user/saveOptGridInfo.json POST /user/saveOptGridInfo.json - 11ms --> POST
+                    /user/saveOptGridInfo.json 500 12ms 83b
+                    √ 参数输入错误-code未输入，期待返回500状态
+                    <-- POST /user/saveOptGridInfo.json POST /user/saveOptGridInfo.json - 11ms --> POST
+                      /user/saveOptGridInfo.json 500 12ms 86b
+                      √ 参数输入错误-gap输入不为数字，期待返回200状态 返回的网格信息参数与设置的一样
+                      <-- POST /user/saveOptGridInfo.json POST /user/saveOptGridInfo.json - 11ms --> POST
+                        /user/saveOptGridInfo.json 500 13ms 103b
+                        √ 参数输入错误-gap输入不超过允许范围，期待返回200状态 返回的网格信息参数与设置的一样
+                        <-- POST /user/saveOptGridInfo.json POST /user/saveOptGridInfo.json - 19ms --> POST
+                          /user/saveOptGridInfo.json 500 21ms 86b
+                          √ 参数输入错误-gap输入不为数字，期待返回200状态 返回的网格信息参数与设置的一样
+                          <-- POST /user/saveOptGridInfo.json POST /user/saveOptGridInfo.json - 9ms --> POST
+                            /user/saveOptGridInfo.json 500 12ms 103b
+                            √ 参数输入错误-gap输入不超过允许范围，期待返回200状态 返回的网格信息参数与设置的一样
+                            查询用户设定的指数网格数据信息
+                            <-- GET /user/queryOptGridInfo.json GET /user/queryOptGridInfo.json - 0ms --> GET
+                              /user/queryOptGridInfo.json 200 2ms 240b
+                              √ happy path ，期待得到正确结果
+                              √ 用户cookie为空，期待返回401错误
+                              查询用户设定的个股止盈补仓数据信息
+                              <-- GET /user/queryOptStockDealDetail.json GET /user/queryOptStockDealDetail.json - 0ms
+                                --> GET /user/queryOptStockDealDetail.json 200 2ms 192b
+                                √ happy path ，期待得到正确结果
+                                √ 用户cookie为空，期待返回401错误
+                                保存用户设置的个股止盈止损信息
+                                √ 用户未登陆，期待返回401错误
+                                <-- POST /user/saveOptStockDealDetail.json POST /user/saveOptStockDealDetail.json - 13ms
+                                  --> POST /user/saveOptStockDealDetail.json 500 14ms 83b
+                                  √ 参数输入错误-code未输入，期待返回500状态
+                                  <-- POST /user/saveOptStockDealDetail.json POST /user/saveOptStockDealDetail.json -
+                                    22ms --> POST /user/saveOptStockDealDetail.json 500 24ms 98b
+                                    √ 参数输入错误-coverTime输入不为数字，期待返回500状态
+                                    <-- POST /user/saveOptStockDealDetail.json POST /user/saveOptStockDealDetail.json -
+                                      9ms --> POST /user/saveOptStockDealDetail.json 500 11ms 100b
+                                      √ 参数输入错误-profitTime输入不为数字，期待返回500状态
+                                      <-- POST /user/saveOptStockDealDetail.json POST /user/saveOptStockDealDetail.json
+                                        - 9ms --> POST /user/saveOptStockDealDetail.json 500 11ms 94b
+                                        √ 参数输入错误-止盈次数和止损次数都不输入，期待返回500状态
+                                        <-- POST /user/saveOptStockDealDetail.json
+                                          POST /user/saveOptStockDealDetail.json - 7ms --> POST
+                                          /user/saveOptStockDealDetail.json 200 9ms 192b
+                                          √ happy path，期待返回200状态 返回的个股止盈补仓数据条数大于1
+                                          保存用户个人自选转债列表
+                                          <-- POST /user/saveOptCbs.json POST /user/saveOptCbs.json - 11ms --> POST
+                                            /user/saveOptCbs.json 500 13ms 85b
+                                            √ 参数codes为空，期待返回500错误
+                                            √ 用户cookie为空，期待返回401错误
+                                            <-- POST /user/saveOptCbs.json POST /user/saveOptCbs.json - 10ms --> POST
+                                              /user/saveOptCbs.json 500 14ms 170b
+                                              √ codes格式输入错误-包含英文，期待拦截请求返回500错误
+                                              <-- POST /user/saveOptCbs.json POST /user/saveOptCbs.json - 9ms --> POST
+                                                /user/saveOptCbs.json 500 12ms 169b
+                                                √ codes格式输入错误-股票代码不为6位数字，期待拦截请求返回500错误
+                                                <-- POST /user/saveOptCbs.json POST /user/saveOptCbs.json - 20ms -->
+                                                  POST /user/saveOptCbs.json 500 23ms 155b
+                                                  √ codes格式输入错误-最后一位多了个逗号，期待拦截请求返回500错误
+                                                  <-- POST /user/saveOptCbs.json POST /user/saveOptCbs.json - 10ms -->
+                                                    POST /user/saveOptCbs.json 500 12ms 158b
+                                                    √ codes格式输入错误-中间2个逗号间不存在股票代码，期待拦截请求返回500错误
+                                                    <-- POST /user/saveOptCbs.json POST /user/saveOptCbs.json - 11ms -->
+                                                      POST /user/saveOptCbs.json 500 13ms 165b
+                                                      √ codes格式输入错误-最开始是一个逗号，期待拦截请求返回500错误
+                                                      <-- POST /user/saveOptCbs.json POST /user/saveOptCbs.json - 8ms
+                                                        --> POST /user/saveOptCbs.json 200 10ms 80b
+                                                        √ happy path 正确设置自选股代码，期待返回的自选股代码同参数中的相同
+                                                        查询用户个人自选转债列表
+                                                        <-- GET /user/queryOptCbs.json GET /user/queryOptCbs.json - 1ms
+                                                          --> GET /user/queryOptCbs.json 200 2ms 80b
+                                                          √ happy path ，期待得到正确结果600030,002014,000800,300104
+                                                          √ 用户cookie为空，期待返回401错误
+                                                          查询用户设定的个股止盈阈值
+                                                          <-- GET /user/queryStopProfitThreshold.json
+                                                            GET /user/queryStopProfitThreshold.json - 0ms --> GET
+                                                            /user/queryStopProfitThreshold.json 200 2ms 62b
+                                                            √ happy path ，状态200 返回正确结果
+                                                            √ 用户cookie为空，期待返回401错误
+                                                            保存用户设置个股止盈阈值
+                                                            √ happy path，状态200 返回正确结果
+                                                            <-- POST /user/saveStopProfitThreshold.json
+                                                              POST /user/saveStopProfitThreshold.json - 5ms --> POST
+                                                              /user/saveStopProfitThreshold.json 500 9ms 51b
+                                                              √ 参数threshold为空，期待返回500错误
+                                                              √ 用户cookie为空，期待返回401错误
+                                                              <-- POST /user/saveStopProfitThreshold.json
+                                                                POST /user/saveStopProfitThreshold.json - 9ms --> POST
+                                                                /user/saveStopProfitThreshold.json 500 11ms 98b
+                                                                √ codes格式输入错误-包含英文，期待拦截请求返回500错误
+                                                                查询用户个人信息
+                                                                <-- GET /user/queryUserInfo.json
+                                                                  GET /user/queryUserInfo.json - 3ms --> GET
+                                                                  /user/queryUserInfo.json 200 4ms 199b
+                                                                  √ happy path ，状态200 返回正确结果
+                                                                  √ 用户cookie为空，期待返回401错误
 
-  authService Test
-    测试登陆成功后保存用户信息数据
-      √ uid为空，预期结果：异常提醒无法正常存储用户数据
-    测试登陆成功后保存用户信息数据
-      √ happy path，预期结果：成功将用户数据存储到mongodb中
+                                                                  authService Test
+                                                                  测试登陆成功后保存用户信息数据
+                                                                  √ uid为空，预期结果：异常提醒无法正常存储用户数据
+                                                                  测试登陆成功后保存用户信息数据
+                                                                  √ happy path，预期结果：成功将用户数据存储到mongodb中
 
 
-  47 passing (653ms)
-
+                                                                  47 passing (653ms)

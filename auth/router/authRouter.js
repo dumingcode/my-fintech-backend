@@ -6,8 +6,8 @@ const routers =
     router.get('auth/weibo/callback', passport.authorization('weibo'), async (ctx) => {
         authController.weiboCallback(ctx)
     })
-        .get('auth/logout', authController.logout)
-        .get('auth/loginTest', authController.loginTest)
+        .get('auth/logout.json', authController.logout)
+        .get('auth/loginTest.json', authController.loginTest)
 
 
 

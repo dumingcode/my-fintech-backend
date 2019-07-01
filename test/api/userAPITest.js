@@ -21,13 +21,13 @@ describe('User API', function () {
                     return done()
                 })
         })
-        it('用户cookie为空，期待返回403错误', function (done) {
+        it('用户cookie为空，期待返回401错误', function (done) {
             request
                 .post('/user/saveOptStocks.json')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
                 .send({ 'codes': '600030,002014,000800,300104' })
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -155,12 +155,12 @@ describe('User API', function () {
                 })
         })
 
-        it('用户cookie为空，期待返回403错误', function (done) {
+        it('用户cookie为空，期待返回401错误', function (done) {
             request
                 .get('/user/queryOptStocks.json')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -192,13 +192,13 @@ describe('User API', function () {
                     return done()
                 })
         })
-        it('用户未登陆，期待返回403错误', function (done) {
+        it('用户未登陆，期待返回401错误', function (done) {
             request
                 .post('/user/saveOptGridInfo.json')
                 .send({ 'code': '399500', 'gap': 5, 'low': 2000 })
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -304,12 +304,12 @@ describe('User API', function () {
                 })
         })
 
-        it('用户cookie为空，期待返回403错误', function (done) {
+        it('用户cookie为空，期待返回401错误', function (done) {
             request
                 .get('/user/queryOptStocks.json')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -339,12 +339,12 @@ describe('User API', function () {
                 })
         })
 
-        it('用户cookie为空，期待返回403错误', function (done) {
+        it('用户cookie为空，期待返回401错误', function (done) {
             request
                 .get('/user/queryOptStockDealDetail.json')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -357,13 +357,13 @@ describe('User API', function () {
 
     describe('保存用户设置的个股止盈止损信息', function () {
 
-        it('用户未登陆，期待返回403错误', function (done) {
+        it('用户未登陆，期待返回401错误', function (done) {
             request
                 .post('/user/saveOptStockDealDetail.json')
                 .send({ 'code': '399500', 'coverTime': 5, 'profitTime': 5 })
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -468,13 +468,13 @@ describe('User API', function () {
                     return done()
                 })
         })
-        it('用户cookie为空，期待返回403错误', function (done) {
+        it('用户cookie为空，期待返回401错误', function (done) {
             request
                 .post('/user/saveOptCbs.json')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
                 .send({ 'codes': '600030,002014,000800,300104' })
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -601,12 +601,12 @@ describe('User API', function () {
                 })
         })
 
-        it('用户cookie为空，期待返回403错误', function (done) {
+        it('用户cookie为空，期待返回401错误', function (done) {
             request
                 .get('/user/queryOptCbs.json')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -636,12 +636,12 @@ describe('User API', function () {
                 })
         })
 
-        it('用户cookie为空，期待返回403错误', function (done) {
+        it('用户cookie为空，期待返回401错误', function (done) {
             request
                 .get('/user/queryStopProfitThreshold.json')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -659,7 +659,7 @@ describe('User API', function () {
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
                 .send({ 'threshold': 30 })
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -682,13 +682,13 @@ describe('User API', function () {
                     return done()
                 })
         })
-        it('用户cookie为空，期待返回403错误', function (done) {
+        it('用户cookie为空，期待返回401错误', function (done) {
             request
                 .post('/user/saveStopProfitThreshold.json')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
                 .send({ 'codes': '600030,002014,000800,300104' })
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -735,12 +735,12 @@ describe('User API', function () {
                 })
         })
 
-        it('用户cookie为空，期待返回403错误', function (done) {
+        it('用户cookie为空，期待返回401错误', function (done) {
             request
                 .get('/user/queryUserInfo.json')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(403)
+                .expect(401)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)

@@ -39,7 +39,7 @@ app.use(session({
 // 拦截登陆 user开头的必须登陆
 app.use(async (ctx, next) => {
     if (!ctx.session.user && ctx.path.includes('/user')) {
-        ctx.status = 403
+        ctx.status = 401
         ctx.body = {
             code: -1,
             msg: '用户未登陆',
