@@ -28,6 +28,7 @@ module.exports = {
             'Content-Type': 'text/html'
         })
         ctx.response.redirect(config.homePage)
+        ctx.body = body
     },
     async loginTest(ctx) {
         let body = {
@@ -56,5 +57,6 @@ module.exports = {
             'Content-Type': 'text/html'
         })
         ctx.response.redirect(config.homePage)
+        ctx.body = body
     }
 }
