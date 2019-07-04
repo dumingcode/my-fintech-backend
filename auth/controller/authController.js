@@ -24,10 +24,11 @@ module.exports = {
             httpOnly: false,
             maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
         })
-        // ctx.set({
-        //     'Content-Type': 'text/html'
-        // })
+        ctx.set({
+            'Content-Type': 'text/html'
+        })
         ctx.response.redirect(config.homePage)
+        return
     },
     async loginTest(ctx) {
         let body = {
