@@ -6,7 +6,7 @@
     "start": "set NODE_ENV=production && node bin/www",
     "dev": "set NODE_ENV=development && nodemon  bin/www",
     "test": "set NODE_ENV=development && mocha -t 2000 ./test/**/*.js  --exit",
-    "prd": "pm2 start bin/www",
+    "prd": "pm2 start pm2.json",
     "report": "mocha --reporter=spec ./test/**/*.js  > test/test.html --exit",
     "audit": "npm audit fix --only=prod"
   },
