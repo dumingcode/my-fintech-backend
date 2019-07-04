@@ -578,6 +578,10 @@
         "cost": {
           "type": "string",
           "example": "买入成本价"
+        },
+        "memo": {
+          "type": "string",
+          "example": "备注"
         }
       }
     },

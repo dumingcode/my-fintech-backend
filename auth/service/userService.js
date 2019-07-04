@@ -46,7 +46,8 @@ module.exports = {
         const schema = Joi.object().keys({
             code: Joi.string().regex(/^([0-9]{6}){1}$/).required(),
             coverTime: Joi.number().integer().min(0),
-            profitTime: Joi.number().integer().min(0)
+            profitTime: Joi.number().integer().min(0),
+            memo: Joi.string()
         }).or('coverTime', 'profitTime')
         const result = Joi.validate(formData, schema)
 
@@ -77,6 +78,9 @@ module.exports = {
         }
         if (formData.cost) {
             dealDetail.cost = formData.cost
+        }
+        if (formData.memo) {
+            dealDetail.memo = formData.memo
         }
 
         await mongdb.updateOne('stock', 'optStockDeal', { '_id': `${user}-${code}` }, dealDetail, true)
