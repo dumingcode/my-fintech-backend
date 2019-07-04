@@ -45,7 +45,6 @@ module.exports = {
         }
         await authService.saveUserInfo(ctx.session.userInfo)
         body.data = ctx.session.userInfo
-        ctx.response.redirect(config.homePage)
         ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
             domain: config.domain,
             path: '/',
@@ -57,7 +56,7 @@ module.exports = {
         ctx.set({
             'Content-Type': 'text/html'
         })
-
+        ctx.response.redirect(config.homePage)
         ctx.body = body
     }
 }

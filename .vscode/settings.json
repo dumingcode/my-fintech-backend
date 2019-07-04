@@ -1,5 +1,6 @@
 {
     "sonarlint.ls.javaHome": "C:\\Program Files\\Java\\jre1.8.0_202",
     "editor.formatOnSave": true,
-    "eslint.autoFixOnSave": true
+    "eslint.autoFixOnSave": true,
+    "eslint.enable": false
 }
