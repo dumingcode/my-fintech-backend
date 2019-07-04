@@ -47,7 +47,7 @@ module.exports = {
             code: Joi.string().regex(/^([0-9]{6}){1}$/).required(),
             coverTime: Joi.number().integer().min(0),
             profitTime: Joi.number().integer().min(0),
-            memo: Joi.string()
+            memo: Joi.string().allow('')
         }).or('coverTime', 'profitTime')
         const result = Joi.validate(formData, schema)
 
