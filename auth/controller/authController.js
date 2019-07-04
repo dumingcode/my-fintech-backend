@@ -19,7 +19,7 @@ module.exports = {
         ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
             domain: config.domain,
             path: '/',
-            secure: process.env.NODE_ENV === 'production' ? true : false,
+            secure: false,
             sameSite: 'strict',
             httpOnly: false,
             maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
@@ -48,7 +48,7 @@ module.exports = {
         ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
             domain: config.domain,
             path: '/',
-            secure: process.env.NODE_ENV === 'production' ? true : false,
+            secure: false,
             sameSite: 'strict',
             httpOnly: false,
             maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
