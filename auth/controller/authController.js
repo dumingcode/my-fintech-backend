@@ -1,4 +1,5 @@
 const authService = require('../service/authService')
+const config = require("../../config")
 module.exports = {
     async weiboCallback(ctx) {
         let body = {
@@ -6,7 +7,6 @@ module.exports = {
             msg: 'ok',
             data: null
         }
-
         ctx.session.user = `weibo${ctx.state.passport.body.id}`
         ctx.session.userInfo = {
             'nickName': ctx.state.passport.body.screen_name,
@@ -16,21 +16,18 @@ module.exports = {
         }
         await authService.saveUserInfo(ctx.session.userInfo)
         body.data = ctx.session.userInfo
-        ctx.body = body
-    },
-    logout(ctx) {
-        let body = {
-            code: 1,
-            msg: 'ok',
-            data: null
-        }
-        if (!ctx.session.user) {
-            body.code = -1
-            body.msg = '已退出'
-            ctx.body = body
-            return
-        }
-        ctx.session = {}
+        ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
+            domain: config.domain,
+            path: '/',
+            secure: process.env.NODE_ENV === 'production' ? true : false,
+            sameSite: 'strict',
+            httpOnly: false,
+            maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
+        })
+        ctx.response.redirect(config.homePage)
+        ctx.set({
+            'Content-Type': 'text/html'
+        })
         ctx.body = body
     },
     async loginTest(ctx) {
@@ -47,6 +44,20 @@ module.exports = {
             'uid': `local26323`
         }
         await authService.saveUserInfo(ctx.session.userInfo)
+        body.data = ctx.session.userInfo
+        ctx.response.redirect(config.homePage)
+        ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
+            domain: config.domain,
+            path: '/',
+            secure: process.env.NODE_ENV === 'production' ? true : false,
+            sameSite: 'strict',
+            httpOnly: false,
+            maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
+        })
+        ctx.set({
+            'Content-Type': 'text/html'
+        })
+
         ctx.body = body
     }
 }

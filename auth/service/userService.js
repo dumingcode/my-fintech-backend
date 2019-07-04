@@ -83,6 +83,24 @@ module.exports = {
         body.data = dealDetail
         return body
     },
+    async delOptStockDealDetail(formData, user) {
+        const schema = Joi.object().keys({
+            code: Joi.string().regex(/^([0-9]{6}){1}$/).required()
+        })
+        const result = Joi.validate(formData, schema)
+        if (result.error !== null) {
+            throw result.error
+        }
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        const code = formData.code
+        await mongdb.deleteOne('stock', 'optStockDeal', { '_id': `${user}-${code}` })
+        body.data = body
+        return body
+    },
     async queryOptStockDealDetail(user) {
         let body = {
             code: 1,

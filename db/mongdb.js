@@ -46,5 +46,13 @@ module.exports = {
         await client.close(true)
         return result
     },
+    async deleteOne(dbName, collectionName, filter) {
+        let client = await MongoClient.connect(mongoDbConfig.url, { useNewUrlParser: true })
+        let db = await client.db(dbName)
+        let col = await db.collection(collectionName)
+        let result = await col.deleteOne(filter)
+        await client.close(true)
+        return result
+    }
 
 }

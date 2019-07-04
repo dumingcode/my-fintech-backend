@@ -22,6 +22,7 @@ module.exports = {
         url: `mongodb://127.0.0.1:27017/stock`
     },
     'secureConfig': secureConfig,
-    domain: '127.0.0.1'
+    domain: '127.0.0.1',
+    homePage: 'http://127.0.0.1:8080/#/home'
 }
 

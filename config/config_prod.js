@@ -24,5 +24,6 @@ module.exports = {
         url: `mongodb://stock:${secureConfig.redisPasswd}@172.17.188.91:27017/stock`
     },
     'secureConfig': secureConfig,
-    domain: 'gunxueqiu.site'
+    domain: 'gunxueqiu.site',
+    homePage: 'https://gunxueqiu.site/#/home'
 }

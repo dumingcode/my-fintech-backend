@@ -1,4 +1,5 @@
 const userService = require('../service/userService')
+const config = require('../../config')
 module.exports = {
     /**
      * 存储个人自选股代码列表
@@ -58,6 +59,18 @@ module.exports = {
     async saveOptStockDealDetail(ctx) {
         ctx.session.refresh()
         let body = await userService.saveOptStockDealDetail(ctx.request.body, ctx.session.user)
+        const stockDealDetail = await userService.queryOptStockDealDetail(ctx.session.user)
+        ctx.session.stockDealDetail = stockDealDetail.data
+        body.data = stockDealDetail.data
+        ctx.body = body
+    },
+    /**
+     * 删除
+     * @param {*} ctx 
+     */
+    async delOptStockDealDetail(ctx) {
+        ctx.session.refresh()
+        let body = await userService.delOptStockDealDetail(ctx.request.body, ctx.session.user)
         const stockDealDetail = await userService.queryOptStockDealDetail(ctx.session.user)
         ctx.session.stockDealDetail = stockDealDetail.data
         body.data = stockDealDetail.data
@@ -127,5 +140,20 @@ module.exports = {
         } else {
             ctx.body = { code: 1, msg: 'ok', data: ctx.session.userInfo }
         }
+    },
+    logout(ctx) {
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        if (!ctx.session.user) {
+            body.code = -1
+            body.msg = '已退出'
+            ctx.body = body
+            return
+        }
+        ctx.session = {}
+        ctx.body = body
     }
 }
