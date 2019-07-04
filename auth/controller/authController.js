@@ -16,7 +16,7 @@ module.exports = {
         }
         await authService.saveUserInfo(ctx.session.userInfo)
         body.data = ctx.session.userInfo
-        ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
+        await ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
             domain: config.domain,
             path: '/',
             secure: false,
