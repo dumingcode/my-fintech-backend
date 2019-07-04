@@ -16,18 +16,18 @@ module.exports = {
         }
         await authService.saveUserInfo(ctx.session.userInfo)
         body.data = ctx.session.userInfo
-        // await ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
-        //     domain: config.domain,
-        //     path: '/',
-        //     secure: false,
-        //     sameSite: 'strict',
-        //     httpOnly: false,
-        //     maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
-        // })
-        // ctx.set({
-        //     'Content-Type': 'text/html'
-        // })
-        ctx.body = body
+        await ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
+            domain: config.domain,
+            path: '/',
+            secure: false,
+            sameSite: 'strict',
+            httpOnly: false,
+            maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
+        })
+        ctx.set({
+            'Content-Type': 'text/html'
+        })
+        ctx.response.redirect(config.homePage)
     },
     async loginTest(ctx) {
         let body = {
