@@ -3,7 +3,7 @@
         {
             "name": "www",
             "script": "./bin/www",
-            "node_args": "-x",
+            "node_args": "--harmony",
             "merge_logs": true,
             "cwd": "./",
             "log-date-format": "YYYY-MM-DD HH:mm Z",
