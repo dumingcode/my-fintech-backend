@@ -7,6 +7,8 @@ const routers =
         await authController.weiboCallback(ctx)
     })
         .get('auth/loginTest', process.env.NODE_ENV === 'production' ? () => { } : authController.loginTest)
+        // 本地登录
+        .post('auth/loginLocal.json', authController.loginLocal)
 
 
 

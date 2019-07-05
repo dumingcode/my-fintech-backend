@@ -57,5 +57,35 @@ module.exports = {
         })
         ctx.response.redirect(config.homePage)
         ctx.body = body
+    },
+    async loginLocal(ctx) {
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        const formdata = ctx.request.body
+        const isValid = authService.isLoginValid(formdata)
+        if (!isValid) {
+            body.code = -1
+            body.msg = '登陆失败，无此用户或密码错误'
+            ctx.body = body
+            return
+        }
+        ctx.session.user = `local_${formdata.username}`
+        ctx.session.userInfo = {
+            'nickName': formdata.username,
+            'uid': `local_${formdata.username}`
+        }
+        body.data = ctx.session.userInfo
+        ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
+            domain: config.domain,
+            path: '/',
+            secure: false,
+            sameSite: 'strict',
+            httpOnly: false,
+            maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
+        })
+        ctx.body = body
     }
 }
