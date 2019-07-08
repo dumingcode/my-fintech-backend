@@ -70,10 +70,10 @@ module.exports = {
 
         dealDetail.user = user
         dealDetail.code = formData.code
-        if (formData.coverTime) {
+        if (formData.coverTime >= 0) {
             dealDetail.coverTime = formData.coverTime
         }
-        if (formData.profitTime) {
+        if (formData.profitTime >= 0) {
             dealDetail.profitTime = formData.profitTime
         }
         if (formData.cost) {
