@@ -79,9 +79,9 @@ module.exports = {
         if (formData.cost) {
             dealDetail.cost = formData.cost
         }
-        if (formData.memo) {
-            dealDetail.memo = formData.memo
-        }
+
+        dealDetail.memo = formData.memo || ''
+
 
         await mongdb.updateOne('stock', 'optStockDeal', { '_id': `${user}-${code}` }, dealDetail, true)
         body.data = dealDetail
