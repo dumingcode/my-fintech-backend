@@ -65,7 +65,7 @@ module.exports = {
             data: null
         }
         const formdata = ctx.request.body
-        const isValid = authService.isLoginValid(formdata)
+        const isValid = await authService.isLoginValid(formdata)
         if (!isValid) {
             body.code = -1
             body.msg = '登陆失败，无此用户或密码错误'

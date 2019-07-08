@@ -31,13 +31,13 @@ module.exports = {
     async isLoginValid(formData) {
         const schema = Joi.object().keys({
             username: Joi.string().required(),
-            password: Joi.string().required(),
+            pwd: Joi.string().required(),
         })
         const result = Joi.validate(formData, schema)
         if (result.error !== null) {
             throw result.error
         }
-        const loginUser = await mongdb.queryDoc('stock', 'userinfo', { '_id': `local_${formData.username}`, 'pwd': formData.password })
+        const loginUser = await mongdb.queryDoc('stock', 'userinfo', { '_id': `local_${formData.username}`, 'pwd': formData.pwd })
         if (loginUser.length > 0) {
             return true
         }
