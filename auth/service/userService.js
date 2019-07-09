@@ -8,7 +8,7 @@ module.exports = {
      */
     async saveOptStocks(formData, user) {
         const schema = Joi.object().keys({
-            codes: Joi.string().regex(/^([0-9]{6},?)+$/).regex(/[^,]$/).required()
+            codes: Joi.string().regex(/^([0-9]{6},?)+$/).regex(/[^,]$/).allow('')
         })
         const result = Joi.validate({ codes: formData.codes }, schema)
         let body = {
@@ -47,8 +47,9 @@ module.exports = {
             code: Joi.string().regex(/^([0-9]{6}){1}$/).required(),
             coverTime: Joi.number().integer().min(0),
             profitTime: Joi.number().integer().min(0),
+            cost: Joi.number().min(0),
             memo: Joi.string().allow('')
-        }).or('coverTime', 'profitTime')
+        }).or('coverTime', 'profitTime', 'cost', 'memo')
         const result = Joi.validate(formData, schema)
 
         if (result.error !== null) {

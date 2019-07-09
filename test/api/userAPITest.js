@@ -22,13 +22,13 @@ describe('User API', function () {
         })
     })
     describe('保存用户个人自选股列表', function () {
-        it('参数codes为空，期待返回500错误', function (done) {
+        it('参数codes为空，期待正常返回', function (done) {
             requestCookie
                 .post('/user/saveOptStocks.json')
                 //.set('Cookie', ['SESSIONID=5181a0e5f5fde416a154a15e5f2d74f3baf7e4bcc56ce604'])
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(500)
+                .expect(200)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
@@ -475,7 +475,7 @@ describe('User API', function () {
                 //.set('Cookie', ['SESSIONID=5181a0e5f5fde416a154a15e5f2d74f3baf7e4bcc56ce604'])
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(500)
+                .expect(200)
                 .end(function (err, res) {
                     if (err) {
                         return done(err)
