@@ -124,7 +124,7 @@ module.exports = {
         const schema = Joi.object().keys({
             code: Joi.string().regex(/^([0-9]{6}){1}$/).required(),
             gap: Joi.number().min(0).max(100),
-            low: Joi.number().min(0)
+            low: Joi.number().min(0).allow(null)
         })
         const result = Joi.validate(formData, schema)
 
@@ -146,12 +146,9 @@ module.exports = {
         if (!formData.user) {
             optGrid.user = user
         }
-        if (formData.low) {
-            optGrid.low = formData.low
-        }
-        if (formData.gap) {
-            optGrid.gap = formData.gap
-        }
+        optGrid.low = formData.low
+        optGrid.gap = formData.gap
+
         await mongdb.updateOne('stock', 'optGrid', { '_id': `${user}-${formData.code}` }, optGrid, true)
         return body
     },

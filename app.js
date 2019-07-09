@@ -38,7 +38,7 @@ app.use(session({
 }))
 // 拦截登陆 user开头的必须登陆
 app.use(async (ctx, next) => {
-    if (!ctx.session.user && ctx.path.includes('/user')) {
+    if (!ctx.session.user && (ctx.path.includes('/user') || ctx.path.includes('/bigdata'))) {
         ctx.status = 401
         ctx.body = {
             code: -1,

@@ -33,7 +33,7 @@ module.exports = {
         }
         param = param.replace(/(.*)[,]$/, '$1');
         let lxrData = await http.get(`http://hq.sinajs.cn/list=${param}`, _responseType = 'arraybuffer')
-        const buf = new Buffer(lxrData.data, 'binary')
+        const buf = Buffer.alloc(lxrData.data.length, lxrData.data, 'binary')
         let retData = iconv.decode(buf, 'GBK')
         let retArr = retData.split(';')
         let jsonArr = []
