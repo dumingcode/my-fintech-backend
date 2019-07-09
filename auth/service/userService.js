@@ -200,7 +200,7 @@ module.exports = {
      */
     async saveOptCbs(formData, user) {
         const schema = Joi.object().keys({
-            codes: Joi.string().regex(/^([0-9]{6},?)+$/).regex(/[^,]$/).required()
+            codes: Joi.string().regex(/^([0-9]{6},?)+$/).regex(/[^,]$/).allow('')
         })
         const result = Joi.validate({ codes: formData.codes }, schema)
         let body = {
