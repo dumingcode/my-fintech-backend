@@ -1,10 +1,6 @@
 sudo: false
 language: node_js
 # safelist
-branches:
-  only:
-  - master
-  - auth
 services:
   - mongodb
 node_js:
@@ -31,7 +27,6 @@ deploy:
   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR $deploy_user@39.107.119.46:$DEPLOY_PATH
   on:
     branch: master
-
 after_deploy:
   - ssh $deploy_user@39.107.119.46 "pm2 restart www"
   - ssh $deploy_user@39.107.119.46 "sh $CLUSTER_SH_PATH/cluster.sh"
