@@ -1,6 +1,6 @@
-const http = require('../util/http')
-const config = require('../config')
-const redisUtil = require('../util/redisUtil')
+const http = require('../../util/http')
+const config = require('../../config')
+const redisUtil = require('../../util/redisUtil')
 
 module.exports = {
 

@@ -11,7 +11,7 @@ module.exports = {
             data: null
         }
         let data = await stockQuantServive.queryStockAlphaBeta(formData)
-        if (data == null || data == undefined) {
+        if (!data) {
             body.code = -1
             body.msg = 'data is null'
         } else {

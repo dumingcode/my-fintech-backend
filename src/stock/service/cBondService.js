@@ -1,14 +1,6 @@
-const config = require('../config')
-const redisUtil = require('../util/redisUtil')
+const config = require('../../config')
+const redisUtil = require('../../util/redisUtil')
 
-function isIntNum(val) {
-    var regPos = /^\d+$/; // 非负整数
-    if (regPos.test(val)) {
-        return true;
-    } else {
-        return false;
-    }
-}
 module.exports = {
     //查询可转债ma5 10 20数据 codes样例 600030,600001
     async queryCbondMa(formData) {

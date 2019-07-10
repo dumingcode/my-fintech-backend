@@ -13,7 +13,7 @@ module.exports = {
         let data = JSON.stringify(Object.assign(lxrJson, qmJson))
 
 
-        if (data == null || data == undefined) {
+        if (!data) {
             body.code = -1
             body.msg = 'data is null'
         } else {
@@ -29,7 +29,7 @@ module.exports = {
         }
         let data = await lxrIndexService.queryLxrIndexDealDate();
 
-        if (data == null || data == undefined) {
+        if (!data) {
             body.code = -1
             body.msg = 'data is null'
         } else {
@@ -45,7 +45,7 @@ module.exports = {
         }
         let data = await lxrIndexService.queryQmIndexDealDate();
 
-        if (data == null || data == undefined) {
+        if (!data) {
             body.code = -1
             body.msg = 'data is null'
         } else {

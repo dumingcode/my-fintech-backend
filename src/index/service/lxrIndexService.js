@@ -1,5 +1,5 @@
-const config = require('../config')
-const redisUtil = require('../util/redisUtil')
+const config = require('../../config')
+const redisUtil = require('../../util/redisUtil')
 module.exports = {
 
     /**

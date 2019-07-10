@@ -1,6 +1,6 @@
 const supertest = require('supertest')
 const assert = require('assert')
-const app = require('../../app')
+const app = require('../../../app')
 const expect = require('chai').expect
 
 const requestCookie = supertest.agent(app.listen())

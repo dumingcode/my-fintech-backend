@@ -1,7 +1,7 @@
-const http = require('../util/http')
-const config = require('../config')
+const http = require('../../util/http')
+const config = require('../../config')
 const iconv = require('iconv-lite');
-const redisUtil = require('../util/redisUtil')
+const redisUtil = require('../../util/redisUtil')
 
 function isIntNum(val) {
     var regPos = /^\d+$/; // 非负整数

@@ -8,7 +8,7 @@ module.exports = {
             data: null
         }
         let data = await coverService.fetchSinaStock(formData)
-        if (data == null || data == undefined) {
+        if (!data) {
             body.code = -1
             body.msg = 'data is null'
         } else {
@@ -24,7 +24,7 @@ module.exports = {
             data: null
         }
         let data = await coverService.fetchSinaStock(formData)
-        if (data == null || data == undefined) {
+        if (!data) {
             body.code = -1
             body.msg = 'data is null'
         } else {
@@ -40,7 +40,7 @@ module.exports = {
             data: null
         }
         let data = await coverService.queryStockYearLowPrice(formData)
-        if (data == null || data == undefined) {
+        if (!data) {
             body.code = -1
             body.msg = 'data is null'
         } else {

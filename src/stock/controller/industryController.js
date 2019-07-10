@@ -8,7 +8,7 @@ module.exports = {
             data: null
         }
         let data = await industryService.queryCitiFstIndustryInfo()
-        if (data == null || data == undefined) {
+        if (!data) {
             body.code = -1
             body.msg = 'data is null'
         } else {
@@ -24,7 +24,7 @@ module.exports = {
             data: null
         }
         let data = await industryService.queryCitiSndIndustryInfo()
-        if (data == null || data == undefined) {
+        if (!data) {
             body.code = -1
             body.msg = 'data is null'
         } else {

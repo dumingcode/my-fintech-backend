@@ -1,8 +1,8 @@
 /**
  * 个股量化相关服务
  */
-const config = require('../config')
-const redisUtil = require('../util/redisUtil')
+const config = require('../../config')
+const redisUtil = require('../../util/redisUtil')
 
 module.exports = {
 

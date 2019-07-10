@@ -5,11 +5,11 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const routers = require('./routes/index')
+const routers = require('./src/routes')
 const Sentry = require('@sentry/node')
 const session = require("koa-session2")
-const Store = require("./auth/store/Store")
-const config = require("./config")
+const Store = require("./src/auth/store/Store")
+const config = require("./src/config")
 const koaSwagger = require('koa2-swagger-ui')
 
 const app = new Koa()
@@ -19,7 +19,7 @@ Sentry.init({ dsn: 'https://c3c61980cbaf419990217ab42643fe12@sentry.io/1420239' 
 
 
 // authentication
-require('./auth/strategy/weiboStrategy')
+require('./src/auth/strategy/weiboStrategy')
 
 // middlewares
 app.use(bodyparser({
@@ -38,7 +38,7 @@ app.use(session({
 }))
 // 拦截登陆 user开头的必须登陆
 app.use(async (ctx, next) => {
-    if (!ctx.session.user && (ctx.path.includes('/user') || ctx.path.includes('/bigdata'))) {
+    if (!ctx.session.user && ctx.path.includes('/user')) {
         ctx.status = 401
         ctx.body = {
             code: -1,
@@ -89,7 +89,9 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(routers.routes()).use(routers.allowedMethods())
+app.use(routers.index.routes()).use(routers.index.allowedMethods())
+app.use(routers.stock.routes()).use(routers.stock.allowedMethods())
+app.use(routers.auth.routes()).use(routers.auth.allowedMethods())
 
 app.use(
     koaSwagger({
