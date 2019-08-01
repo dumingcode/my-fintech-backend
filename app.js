@@ -20,7 +20,7 @@ Sentry.init({ dsn: 'https://c3c61980cbaf419990217ab42643fe12@sentry.io/1420239' 
 
 // authentication
 require('./src/auth/strategy/weiboStrategy')
-
+require('./src/auth/strategy/qqStrategy')
 // middlewares
 app.use(bodyparser({
     enableTypes: ['json', 'form', 'text']

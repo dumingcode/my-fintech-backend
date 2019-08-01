@@ -9,6 +9,9 @@ const routers =
         .get('auth/loginTest', process.env.NODE_ENV === 'production' ? () => { } : authController.loginTest)
         // 本地登录
         .post('auth/loginLocal.json', authController.loginLocal)
+        .get('auth/qq/callback', passport.authorization('qq'), async (ctx) => {
+            await authController.qqCallback(ctx)
+        })
 
 
 
