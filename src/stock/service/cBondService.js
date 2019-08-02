@@ -21,7 +21,8 @@ module.exports = {
                     'ma20GenDate': json['ma20GenDate'],
                     'ma20': json['ma20'],
                     'ma10': json['ma10'],
-                    'ma5': json['ma5']
+                    'ma5': json['ma5'],
+                    'atr': json['atr']
                 }
                 console.log(retObj)
                 return JSON.stringify(retObj)
