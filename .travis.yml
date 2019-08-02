@@ -9,7 +9,7 @@ cache:
     directories:
       - node_modules # 缓存不经常更改的内容
 before_install: 
-  - openssl aes-256-cbc -K $encrypted_b894101e0158_key -iv $encrypted_b894101e0158_iv -in ./src/config/secureConfig_prod.js.enc -out ./src/config/secureConfig_prod.js -d
+  - openssl aes-256-cbc -K $encrypted_743a35807719_key -iv $encrypted_743a35807719_iv -in ./src/config/secureConfig_prod.js.enc -out ./src/config/secureConfig_prod.js -d
   - openssl aes-256-cbc -K $encrypted_383bc2ea2d21_key -iv $encrypted_383bc2ea2d21_iv -in id_rsa.enc -out ~/.ssh/id_rsa -d
   - chmod 600 ~/.ssh/id_rsa
 install:
