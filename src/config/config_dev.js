@@ -13,7 +13,8 @@ module.exports = {
         qmIndexDataAll: 'qmIndexDataAll',
         yearLowStockSet: 'xueQiuStockSet',
         citic1V: 'citic1V',
-        citic2V: 'citic2V'
+        citic2V: 'citic2V',
+        houseDeal: 'houseDeal'
     },
     logConfig: {
         name: 'myfintech-www'

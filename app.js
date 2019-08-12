@@ -92,6 +92,7 @@ app.use(async (ctx, next) => {
 app.use(routers.index.routes()).use(routers.index.allowedMethods())
 app.use(routers.stock.routes()).use(routers.stock.allowedMethods())
 app.use(routers.auth.routes()).use(routers.auth.allowedMethods())
+app.use(routers.house.routes()).use(routers.house.allowedMethods())
 
 app.use(
     koaSwagger({
