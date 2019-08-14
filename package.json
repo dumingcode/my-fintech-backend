@@ -35,7 +35,8 @@
     "l-passport": "^1.1.5",
     "mongodb": "^3.2.7",
     "pug": "^2.0.4",
-    "qs": "^6.7.0"
+    "qs": "^6.7.0",
+    "skyapm-nodejs": "^1.1.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
