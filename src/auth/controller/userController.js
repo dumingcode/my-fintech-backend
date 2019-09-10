@@ -132,7 +132,7 @@ module.exports = {
             ctx.body = { code: 1, msg: 'ok', data: ctx.session.optCbs }
         }
     },
-    async queryUserInfo(ctx) {
+    async queryUserInfo(ctx)  {
         ctx.session.refresh()
         if (!ctx.session.userInfo) {
             const body = await userService.queryUserInfo(ctx.session.user)
@@ -140,6 +140,13 @@ module.exports = {
         } else {
             ctx.body = { code: 1, msg: 'ok', data: ctx.session.userInfo }
         }
+    },
+    // 查询用户自选股跟指数的重合量化数据信息
+    async queryUserIndexSampleInfo(ctx)  {
+        ctx.session.refresh()
+        const body = await userService.queryUserIndexSampleInfo(ctx.session.user)
+        ctx.session.optQuant = body.data
+        ctx.body = body
     },
     logout(ctx) {
         let body = {

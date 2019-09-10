@@ -14,6 +14,7 @@ const routers =
         .get('user/queryUserInfo.json', userController.queryUserInfo)
         .get('user/logout.json', userController.logout)
         .delete('user/delOptStockDealDetail.json', userController.delOptStockDealDetail)
+        .get('user/queryUserIndexSampleInfo.json', userController.queryUserIndexSampleInfo)
 
 
 
