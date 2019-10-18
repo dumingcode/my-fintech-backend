@@ -132,6 +132,43 @@ module.exports = {
             ctx.body = { code: 1, msg: 'ok', data: ctx.session.optCbs }
         }
     },
+    /**
+     * 保存自选股转债交易数据
+     * @param {*} ctx 
+     */
+    async saveOptCbDealDetail(ctx) {
+        ctx.session.refresh()
+        let body = await userService.saveOptCbDealDetail(ctx.request.body, ctx.session.user)
+        const cbDealDetail = await userService.queryOptCbDealDetail(ctx.session.user)
+        ctx.session.cbDealDetail = cbDealDetail.data
+        body.data = cbDealDetail.data
+        ctx.body = body
+    },
+    /**
+     * 删除转债交易数据
+     * @param {*} ctx 
+     */
+    async delOptCbDealDetail(ctx) {
+        ctx.session.refresh()
+        let body = await userService.delOptCbDealDetail(ctx.request.body, ctx.session.user)
+        const cbDealDetail = await userService.queryOptCbDealDetail(ctx.session.user)
+        ctx.session.cbDealDetail = cbDealDetail.data
+        body.data = cbDealDetail.data
+        ctx.body = body
+    },
+    /**
+     * 查询自选转债交易数据
+     * @param {*} ctx 
+     */
+    async queryOptCbDealDetail(ctx) {
+        ctx.session.refresh()
+        if (!ctx.session.stockDealDetail) {
+            const body = await userService.queryOptCbDealDetail(ctx.session.user)
+            ctx.body = body
+        } else {
+            ctx.body = { code: 1, msg: 'ok', data: ctx.session.stockDealDetail }
+        }
+    },
     async queryUserInfo(ctx)  {
         ctx.session.refresh()
         if (!ctx.session.userInfo) {

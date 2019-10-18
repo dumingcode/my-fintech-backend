@@ -230,6 +230,70 @@ module.exports = {
         body.data = optCb
         return body
     },
+    /**
+     * 保存自选转债交易数据-备注
+     * @param {*} formData 
+     * @param {*} user 
+     */
+    async saveOptCbDealDetail(formData, user) {
+        const schema = Joi.object().keys({
+            code: Joi.string().regex(/^([0-9]{6}){1}$/).required(),
+            memo: Joi.string().allow('')
+        }).or('memo')
+        const result = Joi.validate(formData, schema)
+
+        if (result.error !== null) {
+            throw result.error
+        }
+
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        const code = formData.code
+        // 此处应该先查询mongodb中已经保存的数据
+        const optStockDeal = await mongdb.queryDoc('stock', 'optCbDeal', { '_id': `${user}-${code}` })
+        let dealDetail = {}
+        if (optStockDeal.length > 0) {
+            dealDetail = optStockDeal[0]
+        }
+
+        dealDetail.user = user
+        dealDetail.code = formData.code
+        dealDetail.memo = formData.memo || ''
+        await mongdb.updateOne('stock', 'optCbDeal', { '_id': `${user}-${code}` }, dealDetail, true)
+        body.data = dealDetail
+        return body
+    },
+    async delOptCbDealDetail(formData, user) {
+        const schema = Joi.object().keys({
+            code: Joi.string().regex(/^([0-9]{6}){1}$/).required()
+        })
+        const result = Joi.validate(formData, schema)
+        if (result.error !== null) {
+            throw result.error
+        }
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        const code = formData.code
+        await mongdb.deleteOne('stock', 'optCbDeal', { '_id': `${user}-${code}` })
+        body.data = body
+        return body
+    },
+    async queryOptCbDealDetail(user) {
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        const optStock = await mongdb.queryDoc('stock', 'optCbDeal', { 'user': `${user}` })
+        body.data = optStock
+        return body
+    },
     async queryUserInfo(user) {
         let body = {
             code: 1,

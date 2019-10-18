@@ -13,8 +13,9 @@ module.exports = {
             promiseArr.push(redisUtil.redisHGet(config.redisStoreKey.yearLowStockSet, stocks[i]))
         }
         return Promise.all(promiseArr).then(function (values) {
-
+            
             return values.filter(value => { return value != null }).map((jsonStr) => {
+                console.log(jsonStr)
                 let json = JSON.parse(jsonStr)
                 let retObj = {
                     'code': json['code'],

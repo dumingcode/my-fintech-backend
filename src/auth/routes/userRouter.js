@@ -15,6 +15,9 @@ const routers =
         .get('user/logout.json', userController.logout)
         .delete('user/delOptStockDealDetail.json', userController.delOptStockDealDetail)
         .get('user/queryUserIndexSampleInfo.json', userController.queryUserIndexSampleInfo)
+        .delete('user/delOptCbDealDetail.json', userController.delOptCbDealDetail)
+        .get('user/queryOptCbDealDetail.json', userController.queryOptCbDealDetail)
+        .post('user/saveOptCbDealDetail.json', userController.saveOptCbDealDetail)
 
 
 
