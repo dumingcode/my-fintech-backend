@@ -14,6 +14,8 @@ module.exports = {
         yearLowStockSet: 'xueQiuStockSet',
         citic1V: 'citic1V',
         citic2V: 'citic2V',
+        gz1V: 'gz1V',
+        gz2V: 'gz2V',
         houseDeal: 'houseDeal'
     },
     logConfig: {

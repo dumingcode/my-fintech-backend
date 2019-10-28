@@ -10,7 +10,9 @@ const routers = router
     .get('bigdata/queryStockYearLowPrice.json', coverController.queryStockYearLowPrice)
     .get('bigdata/queryCitiFstIndustryInfo.json', indController.queryCitiFstIndustryInfo)
     .get('bigdata/queryCitiSndIndustryInfo.json', indController.queryCitiSndIndustryInfo)
-    .get('bigdata/queryStockIndInfo.json', coverController.queryStockYearLowPrice) //查询个股所属一二级行业
+    .get('bigdata/queryStockIndInfo.json', coverController.queryStockYearLowPrice)
+    .get('bigdata/queryGzSndIndustryInfo.json', indController.queryGzSndIndustryInfo)
+    .get('bigdata/queryGzTrdIndustryInfo.json', indController.queryGzTrdIndustryInfo)
 
 
 module.exports = routers

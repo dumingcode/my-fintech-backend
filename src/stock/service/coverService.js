@@ -79,6 +79,8 @@ module.exports = {
                     'name': json['name'],
                     'citiV1': json['citiV1'],
                     'citiV2': json['citiV2'],
+                    'gz2': json['gz2'] ? json['gz2'] : '',
+                    'gz3': json['gz3'] ? json['gz3'] : '',
                     'low': json['low'],
                     'lowGenDate': json['lowGenDate'],
                     'ma20': json['ma20']
