@@ -1,5 +1,6 @@
 const authService = require('../service/authService')
 const config = require("../../config")
+const dayjs = require('dayjs')
 module.exports = {
     async weiboCallback(ctx) {
         let body = {
@@ -115,5 +116,35 @@ module.exports = {
             maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
         })
         ctx.body = body
-    }
+    },
+    // 游客登陆
+    async loginGuest(ctx) {
+        let body = { 
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        ctx.session.user = 'guest'+dayjs().unix()
+        ctx.session.userInfo = {
+            'nickName': ctx.session.user,
+            'location': '',
+            'profile_image_url': '',
+            'uid': ctx.session.user
+        }
+        await authService.saveUserInfo(ctx.session.userInfo)
+        body.data = ctx.session.userInfo
+        ctx.cookies.set('nickName', ctx.session.userInfo.nickName, {
+            domain: config.domain,
+            path: '/',
+            secure: false,
+            sameSite: 'strict',
+            httpOnly: false,
+            maxAge: 1000 * 60 * 60 * 24 * 7 - 1000 * 60 * 2
+        })
+        ctx.set({
+            'Content-Type': 'text/html'
+        })
+        ctx.response.redirect(config.homePage)
+        ctx.body = body
+    },
 }
