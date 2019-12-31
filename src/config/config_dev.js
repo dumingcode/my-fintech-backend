@@ -26,6 +26,10 @@ module.exports = {
     },
     'secureConfig': secureConfig,
     domain: '127.0.0.1',
-    homePage: 'http://127.0.0.1:8080/#/home'
+    homePage: 'http://127.0.0.1:8080/#/home',
+    wx:{
+        appId:'wx2c537cddadba8266',
+        appSecret:secureConfig.wxAuth.appSecret
+    }
 }
 

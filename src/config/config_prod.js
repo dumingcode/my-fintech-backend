@@ -28,5 +28,9 @@ module.exports = {
     },
     'secureConfig': secureConfig,
     domain: 'gunxueqiu.site',
-    homePage: 'https://gunxueqiu.site/#/home'
+    homePage: 'https://gunxueqiu.site/#/home',
+    wx:{
+        appId:'wx2c537cddadba8266',
+        appSecret:secureConfig.wxAuth.appSecret
+    }
 }
