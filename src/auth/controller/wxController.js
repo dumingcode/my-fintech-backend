@@ -1,5 +1,6 @@
 const authService = require('../service/authService')
 const config = require("../../config")
+const tokenUtil = require('../../util/tokenUtil')
 const dayjs = require('dayjs')
 module.exports = {
     async loginByWeixin(ctx) {
@@ -29,7 +30,7 @@ module.exports = {
             'uid': `wx${userInfo.openId}`
         }
         await authService.saveUserInfo(ctx.session.userInfo)
-        const token = await authService.createToken(ctx.session.user)
+        const token =  tokenUtil.createToken(ctx.session.user)
         body.data = {'token':token,'userInfo':ctx.session.userInfo}
         ctx.body = body
     }

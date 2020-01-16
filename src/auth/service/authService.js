@@ -5,7 +5,6 @@ const http = require('../../util/http')
 const config = require("../../config")
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
-const secret = 'SLDLKKDS323ssdd@#@@gf'
 
 module.exports = {
     /**
@@ -59,7 +58,6 @@ module.exports = {
           const ret = await http.get(url)
           
           let sessionData = ret.data
-          // sessionData = JSON.parse(sessionData)
           console.log(sessionData.session_key)
           console.log(sessionData.openid)
           if (!sessionData.openid) {
@@ -117,11 +115,5 @@ module.exports = {
     } catch (err) {
       return { errno: 500, errmsg: '解析用户数据错误：' + err.message, data: null }
     }
-  },
-  createToken(userInfo) {
-    const token = jwt.sign(userInfo, config.secureConfig.wxAuth.tokenSecret)
-    return token
   }
-
-
 }

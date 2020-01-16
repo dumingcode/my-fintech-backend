@@ -11,6 +11,7 @@ const session = require("koa-session2")
 const Store = require("./src/auth/store/Store")
 const config = require("./src/config")
 const koaSwagger = require('koa2-swagger-ui')
+const tokenUtil = require('./src/util/tokenUtil')
 
 const app = new Koa()
 // error handler
@@ -37,7 +38,13 @@ app.use(session({
     sameSite: 'strict'
 }))
 // 拦截登陆 user开头的必须登陆
+// 添加微信小程序header处理逻辑
 app.use(async (ctx, next) => {
+    const token = ctx.request.header['x-gunxueqiu-token'] || ''
+    if (token) {
+        ctx.session.user = await tokenUtil.getUserId(token)
+        console.log(`wx token ${token}->${ctx.session.user}`)
+    }
     if (!ctx.session.user && ctx.path.includes('/user')) {
         ctx.status = 401
         ctx.body = {
@@ -49,6 +56,9 @@ app.use(async (ctx, next) => {
     }
     await next()
 })
+
+
+
 
 app.use(json())
 app.use(logger())
