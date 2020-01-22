@@ -18,8 +18,6 @@ module.exports = {
                 data: null
             }
           }
-          
-
         ctx.session.user = `wx${userInfo.openId}`
         ctx.session.userInfo = {
             'nickName': userInfo.nickName,

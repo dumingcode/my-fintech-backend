@@ -17,8 +17,8 @@ module.exports = {
         callbackUrl: 'https://gunxueqiu.site/api/auth/qq/callback'
     },
     wxAuth:{
-        appSecret: 'xxxx',
-        tokenSecret: 'xxx@#@@gf'
+        appSecret: '20e4e809b4ca9ec0c3943cdfca6628db',
+        tokenSecret: 'SLDLQEDS323ssdd@#@@gf'
     }
 
 }
