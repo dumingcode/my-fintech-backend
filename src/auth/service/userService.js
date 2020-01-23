@@ -314,8 +314,34 @@ module.exports = {
         console.log(optStock)
         body.data = optStock
         return body
-    }
+    },
+    async saveTotalStopProfitTime(formData, user) {
+        const schema = Joi.object().keys({
+            totalTime: Joi.number().min(0)
+        })
+        const result = Joi.validate(formData, schema)
 
+        if (result.error !== null) {
+            throw result.error
+        }
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        await mongdb.updateOne('stock', 'totalStopProfitTime', { '_id': `${user}` }, { 'totalTime': formData.totalTime }, true)
+        return body
+    },
+    async queryTotalStopProfitTime(user) {
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        const threshold = await mongdb.queryDoc('stock', 'totalStopProfitTime', { '_id': `${user}` })
+        body.data = threshold
+        return body
+    },
 
 
 }

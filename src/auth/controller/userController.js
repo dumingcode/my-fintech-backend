@@ -199,5 +199,22 @@ module.exports = {
         }
         ctx.session = {}
         ctx.body = body
+    },
+    async saveTotalStopProfitTime(ctx) {
+        ctx.session.refresh()
+        let body = await userService.saveTotalStopProfitTime(ctx.request.body, ctx.session.user)
+        const time = await userService.queryTotalStopProfitTime(ctx.session.user)
+        ctx.session.totalStopProfitTime = time.data
+        body.data = time.data
+        ctx.body = body
+    },
+    async queryTotalStopProfitTime(ctx) {
+        ctx.session.refresh()
+        if (!ctx.session.totalStopProfitTime) {
+            const body = await userService.queryTotalStopProfitTime(ctx.session.user)
+            ctx.body = body
+        } else {
+            ctx.body = { code: 1, msg: 'ok', data: ctx.session.totalStopProfitTime }
+        }
     }
 }

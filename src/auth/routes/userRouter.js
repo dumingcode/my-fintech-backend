@@ -18,6 +18,8 @@ const routers =
         .delete('user/delOptCbDealDetail.json', userController.delOptCbDealDetail)
         .get('user/queryOptCbDealDetail.json', userController.queryOptCbDealDetail)
         .post('user/saveOptCbDealDetail.json', userController.saveOptCbDealDetail)
+        .post('user/saveTotalStopProfitTime.json', userController.saveTotalStopProfitTime)
+        .get('user/queryTotalStopProfitTime.json', userController.queryTotalStopProfitTime)
 
 
 
