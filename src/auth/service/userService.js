@@ -47,6 +47,7 @@ module.exports = {
             code: Joi.string().regex(/^([0-9]{6}){1}$/).required(),
             coverTime: Joi.number().integer().min(0),
             profitTime: Joi.number().integer().min(0),
+            totalProfitTime: Joi.number().integer().min(0),
             cost: Joi.number().min(0),
             memo: Joi.string().allow('')
         }).or('coverTime', 'profitTime', 'cost', 'memo')
@@ -76,6 +77,9 @@ module.exports = {
         }
         if (formData.profitTime >= 0) {
             dealDetail.profitTime = formData.profitTime
+        }
+        if (formData.totalProfitTime >= 0) {
+            dealDetail.totalProfitTime = formData.totalProfitTime
         }
         if (formData.cost) {
             dealDetail.cost = formData.cost
