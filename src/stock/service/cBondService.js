@@ -1,5 +1,9 @@
 const config = require('../../config')
 const redisUtil = require('../../util/redisUtil')
+const mongdb = require('../../db/mongdb')
+// const config = require('../../config')
+const Joi = require('@hapi/joi')
+const dayjs = require('dayjs')
 
 module.exports = {
     //查询可转债ma5 10 20数据 codes样例 600030,600001
@@ -30,6 +34,28 @@ module.exports = {
             })
         })
 
+    },
+    async queryRecentCbBasicInfo(formData) {
+        const schema = Joi.object().keys({
+            diff: Joi.number().integer().min(0).max(50)
+        })
+        const result = Joi.validate(formData, schema)
+        if (result.error !== null) {
+            throw result.error
+        }
+        const today = dayjs()
+        formData.endDate = parseInt(today.format('YYYYMMDD'))
+        formData.startDate = parseInt(today.subtract(formData.diff, 'day').format('YYYYMMDD'))
+        const redisKey = `queryRecentCbBasicInfo_${formData.startDate}_${formData.endDate}`
+        const weekData = await redisUtil.redisGet(redisKey)
+        if (!weekData) {
+            const dealData = await mongdb.queryDoc('stock', 'cbBasicInfo', {
+                'LISTDATE': { $gte: parseInt(formData.startDate), $lte: parseInt(formData.endDate) }
+            })
+            await redisUtil.redisSetEx(redisKey, JSON.stringify(dealData), 'EX', 3600)
+            return JSON.stringify(dealData)
+        }
+        return weekData
     }
 
 
