@@ -9,7 +9,6 @@ module.exports = {
         ctx.session.refresh()
         let body = await userService.saveOptStocks(ctx.request.body, ctx.session.user)
         if (body.code > 0) {
-            ctx.session.optStocks = null
             const optStocks = await userService.queryOptStocks(ctx.session.user)
             ctx.session.optStocks = optStocks.data
             body.data = optStocks.data
@@ -35,7 +34,6 @@ module.exports = {
     async saveOptGridInfo(ctx) {
         ctx.session.refresh()
         let body = await userService.saveOptGridInfo(ctx.request.body, ctx.session.user)
-        ctx.session.optGrid = null
         const optGrid = await userService.queryOptGridInfo(ctx.session.user)
         ctx.session.optGrid = optGrid.data
         body.data = optGrid.data
@@ -61,7 +59,6 @@ module.exports = {
     async saveOptStockDealDetail(ctx) {
         ctx.session.refresh()
         let body = await userService.saveOptStockDealDetail(ctx.request.body, ctx.session.user)
-        ctx.session.stockDealDetail = null
         const stockDealDetail = await userService.queryOptStockDealDetail(ctx.session.user)
         ctx.session.stockDealDetail = stockDealDetail.data
         body.data = stockDealDetail.data
@@ -74,7 +71,6 @@ module.exports = {
     async delOptStockDealDetail(ctx) {
         ctx.session.refresh()
         let body = await userService.delOptStockDealDetail(ctx.request.body, ctx.session.user)
-        ctx.session.stockDealDetail = null
         const stockDealDetail = await userService.queryOptStockDealDetail(ctx.session.user)
         ctx.session.stockDealDetail = stockDealDetail.data
         body.data = stockDealDetail.data
@@ -105,7 +101,6 @@ module.exports = {
     async saveStopProfitThreshold(ctx) {
         ctx.session.refresh()
         let body = await userService.saveStopProfitThreshold(ctx.request.body, ctx.session.user)
-        ctx.session.profitThreshold = null
         const profitThreshold = await userService.queryStopProfitThreshold(ctx.session.user)
         ctx.session.profitThreshold = profitThreshold.data
         body.data = profitThreshold.data
@@ -119,7 +114,6 @@ module.exports = {
         ctx.session.refresh()
         let body = await userService.saveOptCbs(ctx.request.body, ctx.session.user)
         if (body.code > 0) {
-            ctx.session.optCbs = null
             const optCbs = await userService.queryOptCbs(ctx.session.user)
             ctx.session.optCbs = optCbs.data
             body.data = optCbs.data
@@ -145,7 +139,6 @@ module.exports = {
     async saveOptCbDealDetail(ctx) {
         ctx.session.refresh()
         let body = await userService.saveOptCbDealDetail(ctx.request.body, ctx.session.user)
-        ctx.session.cbDealDetail = null
         const cbDealDetail = await userService.queryOptCbDealDetail(ctx.session.user)
         ctx.session.cbDealDetail = cbDealDetail.data
         body.data = cbDealDetail.data
@@ -158,7 +151,6 @@ module.exports = {
     async delOptCbDealDetail(ctx) {
         ctx.session.refresh()
         let body = await userService.delOptCbDealDetail(ctx.request.body, ctx.session.user)
-        ctx.session.cbDealDetail = null
         const cbDealDetail = await userService.queryOptCbDealDetail(ctx.session.user)
         ctx.session.cbDealDetail = cbDealDetail.data
         body.data = cbDealDetail.data
@@ -211,7 +203,6 @@ module.exports = {
     async saveTotalStopProfitTime(ctx) {
         ctx.session.refresh()
         let body = await userService.saveTotalStopProfitTime(ctx.request.body, ctx.session.user)
-        ctx.session.totalStopProfitTime = null
         const time = await userService.queryTotalStopProfitTime(ctx.session.user)
         ctx.session.totalStopProfitTime = time.data
         body.data = time.data
