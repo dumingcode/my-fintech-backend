@@ -6,7 +6,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async saveOptStocks(ctx) {
-        ctx.session.refresh()
         let body = await userService.saveOptStocks(ctx.request.body, ctx.session.user)
         if (body.code > 0) {
             const optStocks = await userService.queryOptStocks(ctx.session.user)
@@ -20,7 +19,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async queryOptStocks(ctx) {
-        ctx.session.refresh()
         if (!ctx.session.optStocks) {
             ctx.body = await userService.queryOptStocks(ctx.session.user)
         } else {
@@ -32,7 +30,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async saveOptGridInfo(ctx) {
-        ctx.session.refresh()
         let body = await userService.saveOptGridInfo(ctx.request.body, ctx.session.user)
         const optGrid = await userService.queryOptGridInfo(ctx.session.user)
         ctx.session.optGrid = optGrid.data
@@ -44,7 +41,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async queryOptGridInfo(ctx) {
-        ctx.session.refresh()
         if (!ctx.session.optGrid) {
             const body = await userService.queryOptGridInfo(ctx.session.user)
             ctx.body = body
@@ -57,7 +53,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async saveOptStockDealDetail(ctx) {
-        ctx.session.refresh()
         let body = await userService.saveOptStockDealDetail(ctx.request.body, ctx.session.user)
         const stockDealDetail = await userService.queryOptStockDealDetail(ctx.session.user)
         ctx.session.stockDealDetail = stockDealDetail.data
@@ -69,7 +64,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async delOptStockDealDetail(ctx) {
-        ctx.session.refresh()
         let body = await userService.delOptStockDealDetail(ctx.request.body, ctx.session.user)
         const stockDealDetail = await userService.queryOptStockDealDetail(ctx.session.user)
         ctx.session.stockDealDetail = stockDealDetail.data
@@ -81,7 +75,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async queryOptStockDealDetail(ctx) {
-        ctx.session.refresh()
         if (!ctx.session.stockDealDetail) {
             const body = await userService.queryOptStockDealDetail(ctx.session.user)
             ctx.body = body
@@ -90,7 +83,6 @@ module.exports = {
         }
     },
     async queryStopProfitThreshold(ctx) {
-        ctx.session.refresh()
         if (!ctx.session.profitThreshold) {
             const body = await userService.queryStopProfitThreshold(ctx.session.user)
             ctx.body = body
@@ -99,7 +91,6 @@ module.exports = {
         }
     },
     async saveStopProfitThreshold(ctx) {
-        ctx.session.refresh()
         let body = await userService.saveStopProfitThreshold(ctx.request.body, ctx.session.user)
         const profitThreshold = await userService.queryStopProfitThreshold(ctx.session.user)
         ctx.session.profitThreshold = profitThreshold.data
@@ -111,7 +102,6 @@ module.exports = {
      * @param {} ctx 
      */
     async saveOptCbs(ctx) {
-        ctx.session.refresh()
         let body = await userService.saveOptCbs(ctx.request.body, ctx.session.user)
         if (body.code > 0) {
             const optCbs = await userService.queryOptCbs(ctx.session.user)
@@ -125,7 +115,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async queryOptCbs(ctx) {
-        ctx.session.refresh()
         if (!ctx.session.optCbs) {
             ctx.body = await userService.queryOptCbs(ctx.session.user)
         } else {
@@ -137,7 +126,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async saveOptCbDealDetail(ctx) {
-        ctx.session.refresh()
         let body = await userService.saveOptCbDealDetail(ctx.request.body, ctx.session.user)
         const cbDealDetail = await userService.queryOptCbDealDetail(ctx.session.user)
         ctx.session.cbDealDetail = cbDealDetail.data
@@ -149,7 +137,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async delOptCbDealDetail(ctx) {
-        ctx.session.refresh()
         let body = await userService.delOptCbDealDetail(ctx.request.body, ctx.session.user)
         const cbDealDetail = await userService.queryOptCbDealDetail(ctx.session.user)
         ctx.session.cbDealDetail = cbDealDetail.data
@@ -161,7 +148,6 @@ module.exports = {
      * @param {*} ctx 
      */
     async queryOptCbDealDetail(ctx) {
-        ctx.session.refresh()
         if (!ctx.session.cbDealDetail) {
             const body = await userService.queryOptCbDealDetail(ctx.session.user)
             ctx.body = body
@@ -170,7 +156,6 @@ module.exports = {
         }
     },
     async queryUserInfo(ctx)  {
-        ctx.session.refresh()
         if (!ctx.session.userInfo) {
             const body = await userService.queryUserInfo(ctx.session.user)
             ctx.body = body
@@ -180,7 +165,6 @@ module.exports = {
     },
     // 查询用户自选股跟指数的重合量化数据信息
     async queryUserIndexSampleInfo(ctx)  {
-        ctx.session.refresh()
         const body = await userService.queryUserIndexSampleInfo(ctx.session.user)
         ctx.session.optQuant = body.data
         ctx.body = body
@@ -201,7 +185,6 @@ module.exports = {
         ctx.body = body
     },
     async saveTotalStopProfitTime(ctx) {
-        ctx.session.refresh()
         let body = await userService.saveTotalStopProfitTime(ctx.request.body, ctx.session.user)
         const time = await userService.queryTotalStopProfitTime(ctx.session.user)
         ctx.session.totalStopProfitTime = time.data
@@ -209,7 +192,6 @@ module.exports = {
         ctx.body = body
     },
     async queryTotalStopProfitTime(ctx) {
-        ctx.session.refresh()
         if (!ctx.session.totalStopProfitTime) {
             const body = await userService.queryTotalStopProfitTime(ctx.session.user)
             ctx.body = body
