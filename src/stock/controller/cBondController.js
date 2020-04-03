@@ -34,4 +34,20 @@ module.exports = {
         }
         ctx.body = body
     },
+    async searchCb(ctx) {
+        let formData = ctx.request.body
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        const data = await cBondService.searchCb(formData)
+        if (!data) {
+            body.code = -1
+            body.msg = 'data is null'
+        } else {
+            body.data = data
+        }
+        ctx.body = body
+    }
 }

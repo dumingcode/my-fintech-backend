@@ -1,7 +1,7 @@
 const config = require('../../config')
 const redisUtil = require('../../util/redisUtil')
 const mongdb = require('../../db/mongdb')
-// const config = require('../../config')
+const http = require('../../util/http')
 const Joi = require('@hapi/joi')
 const dayjs = require('dayjs')
 
@@ -56,6 +56,43 @@ module.exports = {
             return JSON.stringify(dealData)
         }
         return weekData
+    },
+    async searchCb(formData) {
+        const schema = Joi.object().keys({
+            content: Joi.string().required()
+        })
+        const result = Joi.validate(formData, schema)
+        if (result.error !== null) {
+            throw result.error
+        }
+        const content = {
+            "from": 0,
+            "size": 5,
+            "query": {
+              "bool": {
+                "must": {
+                  "multi_match": {
+                    "query": formData.content,
+                    "type": "best_fields",
+                    "analyzer": "pinyin_analyzer"
+                  }
+                }
+              }
+            }
+          }
+        let res = []
+        try{
+            const searchResult = await http.post(config.elasticsearch.url+'cbond/_doc/_search', content,false)
+            const searchResultJson = searchResult.data.hits
+            const hits = searchResultJson.hits
+            hits.forEach(hit => {
+                res.push({'bondname':hit['_source']['bondname'],'bondcode':hit['_source']['bondcode']})
+            })
+        } catch(e){
+            console.log(e)
+            return []
+        }
+        return res
     }
 
 

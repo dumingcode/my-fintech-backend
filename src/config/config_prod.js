@@ -28,5 +28,8 @@ module.exports = {
     },
     'secureConfig': secureConfig,
     domain: 'gunxueqiu.site',
-    homePage: 'https://gunxueqiu.site/#/home'
+    homePage: 'https://gunxueqiu.site/#/home',
+    elasticsearch: {
+        url: 'http://172.17.24.253:9200/'
+    }
 }

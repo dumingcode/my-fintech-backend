@@ -26,6 +26,9 @@ module.exports = {
     },
     'secureConfig': secureConfig,
     domain: '127.0.0.1',
-    homePage: 'http://127.0.0.1:8080/#/home'
+    homePage: 'http://127.0.0.1:8080/#/home',
+    elasticsearch: {
+        url: 'http://127.0.0.1:9200/'
+    }
 }
 
