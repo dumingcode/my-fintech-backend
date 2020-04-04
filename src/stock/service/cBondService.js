@@ -67,13 +67,13 @@ module.exports = {
         }
         const content = {
             "from": 0,
-            "size": 5,
+            "size": 10,
             "query": {
               "bool": {
                 "must": {
                   "multi_match": {
                     "query": formData.content,
-                    "type": "best_fields",
+                    "type": "phrase",
                     "analyzer": "pinyin_analyzer"
                   }
                 }

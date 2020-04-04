@@ -4,9 +4,9 @@
   @host={{hostname}}:{{port}}
   
   ###
-  POST http://{{host}}/cBond/searchCb.json HTTP/1.1
+  POST http://{{host}}/stock/searchStock.json HTTP/1.1
   content-type: application/json;charset=UTF-8
   
   {
-    "content":"zxzz"
+    "content":"zxzq"
   }

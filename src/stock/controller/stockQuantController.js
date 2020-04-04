@@ -18,6 +18,22 @@ module.exports = {
             body.data = data
         }
         ctx.body = body
+    },
+    async searchStock(ctx) {
+        let formData = ctx.request.body
+        let body = {
+            code: 1,
+            msg: 'ok',
+            data: null
+        }
+        const data = await stockQuantServive.searchStock(formData)
+        if (!data) {
+            body.code = -1
+            body.msg = 'data is null'
+        } else {
+            body.data = data
+        }
+        ctx.body = body
     }
 
 }
