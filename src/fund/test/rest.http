@@ -1,0 +1,15 @@
+###
+
+POST http://127.0.0.1:3000/fund/queryFundOutLineInfo.json HTTP/1.1
+content-type: application/json
+
+{
+    "queryParameters": [{"match": {"FundName.keyword":"华泰柏瑞行业领先混合"}}],
+    "sortParameters": [{"2018": "desc"}],
+    "from": 0,
+    "size": 10
+}
+
+###
+
+GET http://127.0.0.1:3000/fund/queryFundExtraInfo.json?code=000001&PortfolioEffectiveDate=2020-03-31 HTTP/1.1

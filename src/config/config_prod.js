@@ -18,7 +18,8 @@ module.exports = {
         citic2V: 'citic2V',
         gz1V: 'gz1V',
         gz2V: 'gz2V',
-        houseDeal: 'houseDeal'
+        houseDeal: 'houseDeal',
+        fund: 'fund'
     },
     logConfig: {
         name: 'myfintech-www'
