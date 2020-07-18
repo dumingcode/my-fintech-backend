@@ -78,14 +78,14 @@ module.exports = {
             const portfolioData = await portfolioDataFunc
             const extraDataJson = JSON.parse(extraData)
             return {
-                'Management': extraDataJson['Management'],
-                'Custodial': extraDataJson['Custodial'],
-                'Redemption': extraDataJson['Redemption'],
-                'LastRedemption': extraDataJson['LastRedemption'],
-                'Profile': extraDataJson['Profile'],
-                'Managers': extraDataJson['Managers'],
-                'Top5BondHoldings': portfolioData.length > 0 ? portfolioData[0]['Top5BondHoldings']:[],
-                'Top10StockHoldings': portfolioData.length > 0 ?portfolioData[0]['Top10StockHoldings']:[]
+                'Management': extraDataJson['Management'] ? extraDataJson['Management']: '',
+                'Custodial': extraDataJson['Custodial']  ? extraDataJson['Custodial']: '',
+                'Redemption': extraDataJson['Redemption']  ? extraDataJson['Redemption']: '',
+                'LastRedemption': extraDataJson['LastRedemption']  ? extraDataJson['LastRedemption']: '',
+                'Profile': extraDataJson['Profile']  ? extraDataJson['Profile']: '',
+                'Managers': extraDataJson['Managers']  ? extraDataJson['Managers']: '',
+                'Top5BondHoldings': portfolioData.length > 0 && portfolioData[0]['Top5BondHoldings'] ? portfolioData[0]['Top5BondHoldings']:[],
+                'Top10StockHoldings': portfolioData.length > 0 && portfolioData[0]['Top10StockHoldings'] ? portfolioData[0]['Top10StockHoldings']:[]
             }
         } catch(e){
             console.log(e)
