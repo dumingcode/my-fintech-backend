@@ -78,14 +78,14 @@ module.exports = {
             const portfolioData = await portfolioDataFunc
             const extraDataJson = JSON.parse(extraData)
             return {
-                'Management': 'Management' in extraDataJson ? extraDataJson['Management']: '',
-                'Custodial': 'Custodial' in extraDataJson  ? extraDataJson['Custodial']: '',
-                'Redemption': 'Redemption' in extraDataJson  ? extraDataJson['Redemption']: '',
-                'LastRedemption': 'LastRedemption' in extraDataJson  ? extraDataJson['LastRedemption']: '',
-                'Profile': 'Profile' in extraDataJson  ? extraDataJson['Profile']: '',
-                'Managers': 'Managers' in extraDataJson  ? extraDataJson['Managers']: '',
-                'Top5BondHoldings': portfolioData.length > 0 && 'Top5BondHoldings' in portfolioData[0] ? portfolioData[0]['Top5BondHoldings']:[],
-                'Top10StockHoldings': portfolioData.length > 0 && 'Top10StockHoldings' in portfolioData[0] ? portfolioData[0]['Top10StockHoldings']:[]
+                'Management': extraDataJson && extraDataJson['Management'] ? extraDataJson['Management']: '',
+                'Custodial': extraDataJson && extraDataJson['Custodial']  ? extraDataJson['Custodial']: '',
+                'Redemption': extraDataJson && extraDataJson['Redemption']  ? extraDataJson['Redemption']: '',
+                'LastRedemption': extraDataJson && extraDataJson['LastRedemption']  ? extraDataJson['LastRedemption']: '',
+                'Profile': extraDataJson && extraDataJson['Profile']  ? extraDataJson['Profile']: '',
+                'Managers': extraDataJson && extraDataJson['Managers']  ? extraDataJson['Managers']: '',
+                'Top5BondHoldings': portfolioData.length > 0 && portfolioData[0]['Top5BondHoldings'] ? portfolioData[0]['Top5BondHoldings']:[],
+                'Top10StockHoldings': portfolioData.length > 0 && portfolioData[0]['Top10StockHoldings'] ? portfolioData[0]['Top10StockHoldings']:[]
             }
         } catch(e){
             console.log(e)
