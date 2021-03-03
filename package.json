@@ -34,7 +34,7 @@
     "koa2-swagger-ui": "^2.14.1",
     "l-passport": "^1.1.5",
     "mongodb": "^3.2.7",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "qs": "^6.7.0",
     "skyapm-nodejs": "^1.1.2"
   },
