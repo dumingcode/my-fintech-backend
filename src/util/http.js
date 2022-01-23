@@ -76,7 +76,11 @@ module.exports = {
     },
     get(url = '', _responseType = 'json') {
         // if (process.env.NODE_ENV === 'demo') url = baseUrl + url + '.json'
+
         return axios({
+            headers: {
+                'Referer': 'http://finance.sina.com.cn'
+            },
             method: 'get',
             baseURL: baseUrl,
             url,
